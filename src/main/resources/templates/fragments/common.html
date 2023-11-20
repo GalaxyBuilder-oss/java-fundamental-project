@@ -1,0 +1,57 @@
+<head th:fragment="head">
+    <title th:text="#{app.name}"></title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap-grid.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/bootstrap-reboot.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/bootstrap-utilities.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/bootstrap.rtl.min.css}" />
+</head>
+<header th:fragment="header" class="d-flex flex-wrap justify-content-between align-items-center">
+    <nav class="navbar container-xxl navbar-expand-lg navbar-light bg-light">
+        <div class="container-xxl flex-wrap flex-md-nowrap">
+            <a class="navbar-brand" href="/">Spring Boot</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/add">Add</a>
+                    </li>
+                </ul>
+                <form class="d-flex" method="post" th:action="@{/}">
+                    <input class="form-control me-2" name="nama" type="search" placeholder="Cari Nama Buku.." aria-label="Search">
+                    <button class="btn btn-outline-primary" type="submit">Cari</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+</header>
+<script th:fragment="script" type="text/javascript" th:src="@{/javascript.php}"></script>
+<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/bootstrap.esm.min.js}"></script>
+<footer th:fragment="footer" class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+    <p class="col-md-4 mb-0 text-muted">
+        @ 2023 <span>Spring Boot</span>
+    </p>
+    <a href="/"
+        class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+        <svg class="bi me-2" width="40" height="32" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <image xlink:href="https://en.m.wikipedia.org/wiki/File:Spring_Boot.svg" />
+        </svg>
+        <!-- <img  src="https://en.m.wikipedia.org/wiki/File:Spring_Boot.svg" /> -->
+    </a>
+    <ul class="nav col-md-4 justify-content-end">
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Features</a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Pricing</a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
+    </ul>
+</footer>

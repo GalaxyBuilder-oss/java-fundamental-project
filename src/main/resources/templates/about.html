@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="~{fragments/common :: head}">
+    <title th:text="#{app.name}"></title>
+</head>
+
+<body>
+    <header th:replace="~{fragments/common :: header}"></header>
+    <main class="container-fluid">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>KODE</th>
+                    <th>NAMA BUKU</th>
+                    <th>GENRE</th>
+                    <th>DESKRIPSI</th>
+                    <th>TAHUN TERBIT</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="buku : ${all}" th:object="${buku}">
+                    <td th:text="*{id}"></td>
+                    <td th:text="*{code}"></td>
+                    <td th:text="*{name}"></td>
+                    <td th:text="*{genres}"></td>
+                    <td th:text="*{description}"></td>
+                    <td th:text="*{ryear}"></td>
+                    <td>
+                        <a th:href="@{/delete/{id}(id = *{id})}" class="btn btn-danger">Hapus</a> | <a
+                            th:href="@{/update/{id}(id = *{id})}" class="btn btn-info">Update</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+    <script type="text/javascript" th:src="@{js/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{js/bootstrap.bundle.min.js}"></script>
+    <footer th:replace="~{fragments/common :: footer}"></footer>
+</body>
+
+</html>

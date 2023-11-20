@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="~{fragments/common :: head}">
+    <title th:text="#{app.name}"></title>
+
+</head>
+
+<body>
+    <header th:replace="~{fragments/common :: header}"></header>
+    <main class="container-fluid">
+        <div class="card">
+            <h1>Error</h1>
+            <p th:text="#{app.error1}"></p>
+        </div>
+    </main>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <footer th:replace="~{fragments/common :: footer}"></footer>
+</body>
+
+</html>
