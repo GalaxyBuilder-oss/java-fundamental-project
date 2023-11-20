@@ -1,4 +1,4 @@
-package com.tugas.pertemuan13.services;
+package com.nyoba.nyicilprojek.services;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
-import com.tugas.pertemuan13.models.Buku;
-import com.tugas.pertemuan13.repository.BukuRepository;
+import com.nyoba.nyicilprojek.models.Buku;
+import com.nyoba.nyicilprojek.repository.BukuRepository;
 
 @Service
 public class BukuService {

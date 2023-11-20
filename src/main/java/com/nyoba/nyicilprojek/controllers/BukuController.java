@@ -1,4 +1,4 @@
-package com.tugas.pertemuan13.controllers;
+package com.nyoba.nyicilprojek.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.tugas.pertemuan13.models.Buku;
-import com.tugas.pertemuan13.services.BukuService;
+import com.nyoba.nyicilprojek.models.Buku;
+import com.nyoba.nyicilprojek.services.BukuService;
 
 @Controller
 public class BukuController {

@@ -1,4 +1,4 @@
-package com.tugas.pertemuan13.models;
+package com.nyoba.nyicilprojek.models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

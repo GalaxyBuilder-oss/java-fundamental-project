@@ -1,4 +1,4 @@
-package com.tugas.pertemuan13;
+package com.nyoba.nyicilprojek;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
