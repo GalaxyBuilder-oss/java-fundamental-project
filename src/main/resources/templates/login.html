@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="~{fragments/common :: head}">
+    <title th:text="#{app.name}"></title>
+</head>
+
+<body>
+    <header th:replace="~{fragments/common :: header}"></header>
+    <main class="container-fluid">
+        <div class="container shadow-sm w-25 p-5 mx-auto my-5 bg-body rounded">
+            <form th:action="@{/loginin}" method="post">
+            <div class="form-floating col mb-3">
+                <input type="text" class="form-control" name="username" id="username" />
+                <label for="username">Masukkan Nama Pengguna</label>
+            </div>
+            <div class="form-floating col mb-3">
+                <input type="password" class="form-control" name="password" id="password" />
+                <label for="password">Masukkan Password</label>
+            </div>
+                <input type="submit" class="btn btn-success rounded mx-3" value="Masuk">
+                <input type="reset" class="btn btn-danger rounded mx-3" value="Reset">
+        </form>
+    </div>
+    </main>
+    <script type="text/javascript" th:src="@{js/bootstrap.min.js}"></script>
+    <!-- <script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"></script> -->
+    <footer th:replace="~{fragments/common :: footer}"></footer>
+</body>
+
+</html>
