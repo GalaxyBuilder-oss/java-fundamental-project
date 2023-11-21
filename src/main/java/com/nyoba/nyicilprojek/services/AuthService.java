@@ -4,7 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-import com.nyoba.nyicilprojek.models.User;
+import com.nyoba.nyicilprojek.models.Auth;
 import com.nyoba.nyicilprojek.repository.AuthRepository;
 
 @Service
@@ -21,8 +21,8 @@ public class AuthService{
             return "redirect:/";
         } else {
             if(!userRepository.findAll().isEmpty()) {
-            List<User> all=userRepository.findAll();
-            for (User user:all) {
+            List<Auth> all=userRepository.findAll();
+            for (Auth user:all) {
                 if (username.equalsIgnoreCase(user.getUsername())&&password.equalsIgnoreCase(user.getPassword())) {
                     isUserLogin=true; break;
             }}}

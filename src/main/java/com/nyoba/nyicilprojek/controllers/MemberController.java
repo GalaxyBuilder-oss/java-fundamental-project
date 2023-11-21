@@ -16,7 +16,7 @@ import com.nyoba.nyicilprojek.services.MemberService;
 import com.nyoba.nyicilprojek.services.AuthService;
 
 @Controller
-public class AuthController {
+public class MemberController {
 
     @Autowired
     private MemberService bukuService;

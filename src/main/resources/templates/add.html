@@ -12,26 +12,26 @@
         <form th:action="@{/save}" method="post">
 
             <div class="form-group row">
-                <label for="" class="col-sm-2 col-form-label">KODE BUKU</label>
-                <input type="text" class="form-control form-control-sm" th:field="${add.code}" required>
+                <label for="" class="col-sm-2 col-form-label">NIM</label>
+                <input type="text" class="form-control form-control-sm" th:field="${add.nim}" required>
                 <small id="passwordHelpBlock" class="form-text text-muted">
-                    Kode Buku Harus Unik Dan Tidak Boleh Sama Satu Sama Lainnya
+                    Nim Harus Unik Dan Tidak Boleh Sama Satu Sama Lainnya
                   </small>
             </div>
             <div class="form-group row">
-                <label for="" class="col-sm-2 col-form-label">NAMA BUKU</label>
+                <label for="" class="col-sm-2 col-form-label">NAMA MAHASISWA</label>
                 <input type="text" class="form-control form-control-sm" th:field="${add.name}" required>
             </div>
             <div class="form-group row">
-                <label for="" class="col-sm-2 col-form-label">GENRE</label>
-                <input type="text" class="form-control form-control-sm" th:field="${add.genres}">
+                <label for="" class="col-sm-2 col-form-label">ALAMAT</label>
+                <input type="text" class="form-control form-control-sm" th:field="${add.address}">
             </div>
             <div class="form-group row">
                 <label for="" class="col-sm-2 col-form-label">DESKRIPSI</label>
                 <input type="text" class="form-control form-control-sm" th:field="${add.description}">
             </div>
             <div class="form-group row">
-                <label for="" class="col-sm-2 col-form-label">TAHUN RILIS</label>
+                <label for="" class="col-sm-2 col-form-label">TAHUN MASUK</label>
                 <input type="text" class="form-control form-control-sm" th:field="${add.ryear}" required>
             </div>
             <div class="form-group row">

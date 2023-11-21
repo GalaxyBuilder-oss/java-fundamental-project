@@ -12,7 +12,7 @@
 
         <form th:action="@{/saveUpdate}" method="post">
             <div class="form-group row">
-                <label for="" class="col-sm-2 col-form-label">ID BUKU</label>
+                <label for="" class="col-sm-2 col-form-label">ID</label>
                 <div class="col-sm-10">
 
                     <input type="hidden" th:field="${update.id}">
@@ -20,24 +20,24 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label for="" class="col-sm-2 col-form-label">KODE BUKU</label>
+                <label for="" class="col-sm-2 col-form-label">NIM</label>
                 <div class="col-sm-10">
 
-                    <input type="text" class="form-control" th:field="${update.code}" required>
+                    <input type="text" class="form-control" th:field="${update.nim}" required>
                 </div>
             </div>
             <div class="form-group row">
-                <label for="" class="col-sm-2 col-form-label">NAMA BUKU</label>
+                <label for="" class="col-sm-2 col-form-label">NAMA MAHASISWA</label>
                 <div class="col-sm-10">
 
                     <input type="text" class="form-control" th:field="${update.name}" required>
                 </div>
             </div>
             <div class="form-group row">
-                <label for="" class="col-sm-2 col-form-label">GENRE</label>
+                <label for="" class="col-sm-2 col-form-label">ALAMAT</label>
                 <div class="col-sm-10">
 
-                    <input type="text" class="form-control" th:field="${update.genres}">
+                    <input type="text" class="form-control" th:field="${update.address}">
                 </div>
             </div>
             <div class="form-group row">
@@ -48,7 +48,7 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label for="" class="col-sm-2 col-form-label">TAHUN RILIS</label>
+                <label for="" class="col-sm-2 col-form-label">TAHUN MASUK</label>
                 <div class="col-sm-10">
 
                     <input type="text" class="form-control" th:field="${update.ryear}" required>

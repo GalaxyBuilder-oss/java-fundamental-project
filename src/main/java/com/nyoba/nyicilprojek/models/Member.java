@@ -12,7 +12,7 @@ import lombok.Data;
 @Data
 public class Member {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private String nim;
     private String name;

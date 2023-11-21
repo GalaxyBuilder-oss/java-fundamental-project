@@ -4,8 +4,8 @@ import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.nyoba.nyicilprojek.models.User;
+import com.nyoba.nyicilprojek.models.Auth;
 
-public interface AuthRepository extends JpaRepository<User, UUID> {
+public interface AuthRepository extends JpaRepository<Auth, UUID> {
     
 }

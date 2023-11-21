@@ -35,14 +35,15 @@ public class MemberService {
     }
 
     public String save(Member m, Model model) {
-        List<Member> members = memberRepository.findAll();
         boolean isThere = false;
+        if (!memberRepository.findAll().isEmpty()){
+            List<Member> members = memberRepository.findAll();
         for (Member member : members) {
             if (member.getNim().equals(m.getNim())) {
                 isThere = true;
                 break;
             }
-        }
+        }}
         if (isThere) {
             model.addAttribute("errormessage", "Data Telah Ada, Masukan Data Lain");
             return "redirect:/error";
