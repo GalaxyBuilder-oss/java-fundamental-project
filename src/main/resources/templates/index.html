@@ -6,6 +6,7 @@
 </head>
 
 <body>
+    <!-- <div th:insert="~{ footer :: (${user.isAdmin}? #{footer.admin} : #{footer.normaluser}) }"></div> -->
     <header th:replace="~{fragments/common :: header}"></header>
     <main class="container-fluid">
         <table class="table table-hover">
@@ -34,6 +35,11 @@
                     </td>
                 </tr>
             </tbody>
+            <tfoot>
+                <tr>
+                    <td th:text="${'Jumlah : '+count}"></td>
+                </tr>
+            </tfoot>
         </table>
     </main>
     <script type="text/javascript" th:src="@{js/bootstrap.min.js}"></script>

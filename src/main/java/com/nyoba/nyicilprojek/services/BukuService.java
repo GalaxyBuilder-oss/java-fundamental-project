@@ -19,6 +19,7 @@ public class BukuService {
     public String showAll(Model model) {
         if (!bukuRepository.findAll().isEmpty()) {
             model.addAttribute("all", bukuRepository.findAll());
+            model.addAttribute("count",bukuRepository.count());
             return "index";
         } else {
             model.addAttribute("allNull", null);
