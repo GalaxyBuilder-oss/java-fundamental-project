@@ -1,5 +1,7 @@
 package com.nyoba.nyicilprojek.controllers;
 
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,15 +11,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.nyoba.nyicilprojek.models.Buku;
-import com.nyoba.nyicilprojek.services.BukuService;
-import com.nyoba.nyicilprojek.services.UserService;
+import com.nyoba.nyicilprojek.models.Member;
+import com.nyoba.nyicilprojek.services.MemberService;
+import com.nyoba.nyicilprojek.services.AuthService;
 
 @Controller
 public class AuthController {
 
     @Autowired
-    private BukuService bukuService;
+    private MemberService bukuService;
 
     @GetMapping
     public String all(Model model) {
@@ -25,27 +27,27 @@ public class AuthController {
     }
     @GetMapping("/add")
     public String add(Model model) {
-        if (UserService.isAdminLogin) return bukuService.add(model);
+        if (AuthService.isAdminLogin) return bukuService.add(model);
         else return "redirect:/login";
     }
     @PostMapping("/save")
-    public String save(Buku buku, Model model) {
-        if (UserService.isAdminLogin) return bukuService.save(buku, model);
+    public String save(Member buku, Model model) {
+        if (AuthService.isAdminLogin) return bukuService.save(buku, model);
         else return "redirect:/login";
     }
     @GetMapping("/delete/{id}")
-    public String delete(@PathVariable(value = "id") Long id, Model model) {
-        if (UserService.isAdminLogin) return bukuService.delete(id, model);
+    public String delete(@PathVariable(value = "id") UUID id, Model model) {
+        if (AuthService.isAdminLogin) return bukuService.delete(id, model);
         else return "redirect:/login";
     }
     @GetMapping("/update/{id}")
-    public String update(@PathVariable(value = "id") Long id, Model model) {
-        if (UserService.isAdminLogin) return bukuService.update(id,model);
+    public String update(@PathVariable(value = "id") UUID id, Model model) {
+        if (AuthService.isAdminLogin) return bukuService.update(id,model);
         else return "redirect:/login";
     }
     @PostMapping("/saveUpdate")
-    public String saveUpdaString(Buku buku) {
-        if (UserService.isAdminLogin) return bukuService.saveUpdate(buku);
+    public String saveUpdaString(Member buku) {
+        if (AuthService.isAdminLogin) return bukuService.saveUpdate(buku);
         else return "redirect:/";
     }
     @GetMapping("/login")
@@ -55,7 +57,7 @@ public class AuthController {
     @PostMapping("/loginin")
     public String loginProgress(@RequestBody()String data,Model model){
         System.out.println(data.split("&")[0].replace("username=", "")+"+"+data.split("&")[1].replace("password=", ""));
-        return UserService.authLogin(data.split("&")[0].replace("username=", ""), data.split("&")[0].replace("password=", ""), model);
+        return AuthService.authLogin(data.split("&")[0].replace("username=", ""), data.split("&")[0].replace("password=", ""), model);
         // return "redirect:/";
     }
     @PostMapping("/")
@@ -64,8 +66,8 @@ public class AuthController {
     }
     @GetMapping("/logout")
     public String logout() {
-        UserService.isAdminLogin=false;
-        UserService.isUserLogin=false;
+        AuthService.isAdminLogin=false;
+        AuthService.isUserLogin=false;
         return "redirect:/";
     }
 }

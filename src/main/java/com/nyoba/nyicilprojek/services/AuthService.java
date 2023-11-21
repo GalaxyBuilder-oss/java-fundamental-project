@@ -5,12 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import com.nyoba.nyicilprojek.models.User;
-import com.nyoba.nyicilprojek.repository.UserRepository;
+import com.nyoba.nyicilprojek.repository.AuthRepository;
 
 @Service
-public class UserService{
+public class AuthService{
     @Autowired
-    private static UserRepository userRepository;
+    private static AuthRepository userRepository;
     private final static String ADMIN_USERNAME="admin";
     private final static String ADMIN_PASSWORD="admin123";
     public static boolean isAdminLogin=false;
