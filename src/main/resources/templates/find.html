@@ -6,7 +6,7 @@
 </head>
 
 <body>
-    <!-- <div th:replace="~{ fragments/common :: (${user.isAdmin}? #{header.admin} : #{header.normaluser}) }"></div> -->
+    <!-- <div th:replace="~{ header :: (${user.isAdmin}? #{header.admin} : #{header.normaluser}) }"></div> -->
     <header th:insert="~{fragments/header_page :: (${isLogin}) ? headerlogin : headernologin}"></header>
     <main class="container-fluid">
         <table class="table table-hover">
@@ -30,16 +30,11 @@
                     <td th:text="*{description}"></td>
                     <td th:text="*{ryear}"></td>
                     <td>
-                        <a
-                            th:href="@{/update/{id}(id = *{id})}" class="btn btn-info">Update</a> | <a th:href="@{/delete/{id}(id = *{id})}" class="btn btn-danger">Hapus</a>
+                        <a th:href="@{/delete/{id}(id = *{id})}" class="btn btn-danger">Hapus</a> | <a
+                            th:href="@{/update/{id}(id = *{id})}" class="btn btn-info">Update</a>
                     </td>
                 </tr>
             </tbody>
-            <tfoot>
-                <tr>
-                    <td th:text="${'Jumlah : '+count}"></td>
-                </tr>
-            </tfoot>
         </table>
     </main>
     <script type="text/javascript" th:src="@{js/bootstrap.min.js}"></script>

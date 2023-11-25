@@ -19,55 +19,55 @@ import com.nyoba.nyicilprojek.services.AuthService;
 public class MemberController {
 
     @Autowired
-    private MemberService bukuService;
+    private MemberService memberService;
 
     @GetMapping
     public String all(Model model) {
-        return bukuService.showAll(model);
+        return memberService.showAll(model);
     }
     @GetMapping("/add")
     public String add(Model model) {
-        if (AuthService.isAdminLogin) return bukuService.add(model);
-        else return "redirect:/login";
+        if(AuthService.isAdminLogin) return memberService.add(model);
+        return "redirect:/login";
     }
     @PostMapping("/save")
-    public String save(Member buku, Model model) {
-        if (AuthService.isAdminLogin) return bukuService.save(buku, model);
-        else return "redirect:/login";
+    public String save(Member member, Model model) {
+        if(AuthService.isAdminLogin) return memberService.save(member, model);
+        return "redirect:/login";
     }
     @GetMapping("/delete/{id}")
-    public String delete(@PathVariable(value = "id") UUID id, Model model) {
-        if (AuthService.isAdminLogin) return bukuService.delete(id, model);
-        else return "redirect:/login";
+    public String delete(@PathVariable(name="id")UUID id, Model model) {
+        if(AuthService.isAdminLogin) return memberService.delete(id, model);
+        return "redirect:/login";
     }
     @GetMapping("/update/{id}")
-    public String update(@PathVariable(value = "id") UUID id, Model model) {
-        if (AuthService.isAdminLogin) return bukuService.update(id,model);
-        else return "redirect:/login";
+    public String update(@PathVariable(name="id")UUID id, Model model) {
+        if(AuthService.isAdminLogin) return memberService.update(id,model);
+        return "redirect:/login";
     }
     @PostMapping("/saveUpdate")
-    public String saveUpdaString(Member buku) {
-        if (AuthService.isAdminLogin) return bukuService.saveUpdate(buku);
-        else return "redirect:/";
+    public String saveUpdaString(Member member) {
+        if(AuthService.isAdminLogin) return memberService.saveUpdate(member);
+        return "redirect:/";
     }
     @GetMapping("/login")
     public String login(){
+        if(AuthService.isAdminLogin) return "redirect:/";
         return "login";
     }
     @PostMapping("/loginin")
     public String loginProgress(@RequestBody()String data,Model model){
         System.out.println(data.split("&")[0].replace("username=", "")+"+"+data.split("&")[1].replace("password=", ""));
         return AuthService.authLogin(data.split("&")[0].replace("username=", ""), data.split("&")[0].replace("password=", ""), model);
-        // return "redirect:/";
     }
-    @PostMapping("/")
-    public String find(@RequestBody String name, Model model) {
-        return bukuService.find(name, model);
+    @GetMapping("/find")
+    public String find(@RequestParam(value = "nama") String name, Model model) {
+        return memberService.find(name, model);
     }
     @GetMapping("/logout")
     public String logout() {
-        AuthService.isAdminLogin=false;
-        AuthService.isUserLogin=false;
+        if(AuthService.isAdminLogin) AuthService.isAdminLogin=false;
+        if(AuthService.isUserLogin) AuthService.isUserLogin=false;
         return "redirect:/";
     }
 }

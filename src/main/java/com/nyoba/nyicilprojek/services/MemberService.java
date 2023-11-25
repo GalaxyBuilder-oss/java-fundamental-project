@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
@@ -19,7 +20,8 @@ public class MemberService {
 
     public String showAll(Model model) {
         if (!memberRepository.findAll().isEmpty()) {
-            model.addAttribute("all", memberRepository.findAll());
+            model.addAttribute("isLogin", AuthService.isAdminLogin);
+            model.addAttribute("all", memberRepository.findAll(Sort.by(Sort.Direction.ASC, "name")));
             model.addAttribute("count",memberRepository.count());
             return "index";
         } else {
@@ -30,6 +32,7 @@ public class MemberService {
 
     public String add(Model model) {
         Member member = new Member();
+        model.addAttribute("isLogin", AuthService.isAdminLogin);
         model.addAttribute("add", member);
         return "add";
     }
@@ -49,7 +52,7 @@ public class MemberService {
             return "redirect:/error";
         } else {
             memberRepository.save(m);
-            return "redirect:/";
+            return "redirect:/add";
         }
     }
 
@@ -74,18 +77,21 @@ public class MemberService {
     public String update(UUID id, Model model) {
         List<Member> members = memberRepository.findAll();
         Member member = memberRepository.getReferenceById(id);
+        // Member member =  new Member();
         boolean isThere = false;
-        for (Member m : members) {
-            if (id == m.getId()) {
+        for (Member m:members) {
+            if (m.getId().equals(id)) {
                 isThere = true;
                 break;
             }
         }
         if (isThere) {
+            model.addAttribute("isLogin", AuthService.isAdminLogin);
             model.addAttribute("update", member);
             return "update";
         } else {
             model.addAttribute("errormessage", "Data Tidak Ada, Masukan Data Lain");
+            System.out.println("Error Mas");
             return "redirect:/error";
         }
     }
@@ -100,14 +106,15 @@ public class MemberService {
         return "redirect:/";
     }
     public String find(String nama, Model model) {
-        List<Member> members = memberRepository.findAll();
-        List<Member> m = new ArrayList<>();
-        for (Member member : members) {
-            if (member.getName().contains(nama.replace("nama=",""))) {
-                m.add(member);
-            }
-        }
-        model.addAttribute("all",m);
-        return "/index";
+        // List<Member> members = memberRepository.findAll();
+        // List<Member> m = new ArrayList<>();
+        // for (Member member : members) {
+        //     if (member.getName().contains(nama)) {
+        //         m.add(member);
+        //     }
+        // }
+        model.addAttribute("isLogin", AuthService.isAdminLogin);
+        model.addAttribute("all", memberRepository.findByNameContainingIgnoreCase(nama,Sort.by(Sort.Direction.ASC, "name")));
+        return "find";
     }
 }
