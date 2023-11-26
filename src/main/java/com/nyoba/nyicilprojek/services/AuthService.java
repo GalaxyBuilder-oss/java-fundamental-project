@@ -1,59 +1,63 @@
 package com.nyoba.nyicilprojek.services;
 
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.stereotype.Service;
+
 import com.nyoba.nyicilprojek.models.Auth;
-import com.nyoba.nyicilprojek.models.Member;
-import com.nyoba.nyicilprojek.repository.AuthRepository;
+import com.nyoba.nyicilprojek.config.AuthConfig;
+import com.nyoba.nyicilprojek.config.ServiceConfig;
 
 @Service
-public class AuthService{
-    @Autowired
-    private AuthRepository authRepository;
-    @Autowired
-    private static AuthRepository userRepository;
-    private final static String ADMIN_USERNAME="admin";
-    private final static String ADMIN_PASSWORD="admin123";
-    public static boolean isAdminLogin=false;
-    public static boolean isUserLogin=false;
-    public static String authLogin(String username,String password,Model model) {
-        if (username.equalsIgnoreCase(ADMIN_USERNAME) || password.equalsIgnoreCase(ADMIN_PASSWORD)) {
-            isAdminLogin=true;
-            return "redirect:/";
-        } else {
-            if(!userRepository.findAll().isEmpty()) {
-            List<Auth> all=userRepository.findAll();
-            for (Auth user:all) {
-                if (username.equalsIgnoreCase(user.getUsername())&&password.equalsIgnoreCase(user.getPassword())) {
-                    isUserLogin=true; break;
-            }}}
-            if (isUserLogin) model.addAttribute("error","");
-            else model.addAttribute("error","Account Not Found!");
-            return "redirect:/login";
-        }}
+public class AuthService extends ServiceConfig{
+
+    public String authLogin(String username,String password,Model model) {
+        if(!authRepository.findAll().isEmpty()) {
+        List<Auth> all=authRepository.findAll();
+        for (Auth user:all) {
+            if (username.equalsIgnoreCase(user.getUsername())&&password.equalsIgnoreCase(user.getPassword())) {
+                if(user.getRole().equalsIgnoreCase("admin")) AuthConfig.isAdminLogin=true;
+                else AuthConfig.isUserLogin=true;
+                break;
+            }
+        }
+    }
+    if(AuthConfig.isAdminLogin) {
+            AuthConfig.isLogin=true;
+            return "redirect:/admin/";
+        } else if(AuthConfig.isUserLogin){
+            AuthConfig.isLogin=true;
+            return "redirect:/user/";
+        } else model.addAttribute("errormessage","Account Not Found!");
+        return "error";
+    }
     public String add(Model model) {
         Auth auth = new Auth();
         model.addAttribute("add", auth);
         return "/auth/add";
     }
-    public String save(Auth a) {
-        // boolean isThere = false;
-        // if (!userRepository.findAll().isEmpty()){
-        //     List<Auth> auths = userRepository.findAll();
-        // for (Auth auth : auths) {
-        //     if (auth.getUsername().equals(a.getUsername())) {
-        //         isThere = true;
-        //         break;
-        //     }
-        // }}
-        // if (isThere) {
-        //     model.addAttribute("errormessage", "Data Telah Ada, Masukan Data Lain");
-        //     return "redirect:/error";
-        // } else {
+    public String save(Auth a, Model model) {
+        boolean isThere = false;
+        if (!authRepository.findAll().isEmpty()){
+            List<Auth> auths = authRepository.findAll();
+        for (Auth auth : auths) {
+            if (auth.getUsername().equals(a.getUsername())) {
+                isThere = true;
+                break;
+            }
+        }}
+        if (isThere) {
+            model.addAttribute("errormessage", "Data Telah Ada, Masukan Data Lain");
+            return "error";
+        } else {
+            Auth auth = new Auth();
+            auth.setId(a.getId());
+            auth.setUsername(a.getUsername());
+            Integer p = a.getPassword().hashCode();
+            auth.setPassword(p.toString());
+            auth.setRole(a.getRole());
             authRepository.save(a);
-            return "redirect:/auth/add";
-        // }
+            return "redirect:/auth/add/";
+        }
     }
 }

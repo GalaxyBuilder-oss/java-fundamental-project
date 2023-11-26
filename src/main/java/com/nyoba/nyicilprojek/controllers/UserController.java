@@ -1,29 +1,23 @@
 package com.nyoba.nyicilprojek.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.nyoba.nyicilprojek.models.Auth;
-import com.nyoba.nyicilprojek.services.AuthService;
+import com.nyoba.nyicilprojek.config.AuthConfig;
 
 @Controller
-@RequestMapping("/auth")
-public class UserController {
-    @Autowired
-    private AuthService authService;
-    
-    @GetMapping("/add")
-    public String add(Model model) {
-        return authService.add(model);
-    }
-    @PostMapping("/save")
-    public String save(@ModelAttribute(value = "add")Auth user) {
-        return authService.save(user);
-    }
+@RequestMapping("/user")
+public class UserController extends AuthConfig {
 
+    @GetMapping("/")
+    public String home(Model model) {
+        if(isUserLogin){
+            model.addAttribute("isLogin",isUserLogin);
+            return "user/index";
+        }
+        else if(isAdminLogin) return "redirect:/admin/";
+        return "redirect:/login/";
+    }
 }

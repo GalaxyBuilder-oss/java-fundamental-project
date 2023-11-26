@@ -1,40 +1,36 @@
 package com.nyoba.nyicilprojek.services;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.nyoba.nyicilprojek.models.Member;
-import com.nyoba.nyicilprojek.repository.MemberRepository;
+import com.nyoba.nyicilprojek.config.AuthConfig;
+import com.nyoba.nyicilprojek.config.ServiceConfig;
 
 @Service
-public class MemberService {
-
-    @Autowired
-    private MemberRepository memberRepository;
+public class MemberService extends ServiceConfig {
 
     public String showAll(Model model) {
         if (!memberRepository.findAll().isEmpty()) {
-            model.addAttribute("isLogin", AuthService.isAdminLogin);
+            model.addAttribute("isLogin", AuthConfig.isAdminLogin);
             model.addAttribute("all", memberRepository.findAll(Sort.by(Sort.Direction.ASC, "name")));
             model.addAttribute("count",memberRepository.count());
-            return "index";
+            return "/admin/scholar-list";
         } else {
             model.addAttribute("allNull", null);
-            return "redirect:/add";
+            return "redirect:/admin/add";
         }
     }
 
     public String add(Model model) {
         Member member = new Member();
-        model.addAttribute("isLogin", AuthService.isAdminLogin);
+        model.addAttribute("isLogin", AuthConfig.isAdminLogin);
         model.addAttribute("add", member);
-        return "add";
+        return "/admin/add";
     }
 
     public String save(Member m, Model model) {
@@ -52,7 +48,7 @@ public class MemberService {
             return "redirect:/error";
         } else {
             memberRepository.save(m);
-            return "redirect:/add";
+            return "redirect:/admin/add";
         }
     }
 
@@ -67,7 +63,7 @@ public class MemberService {
         }
         if (isThere) {
             memberRepository.deleteById(id);
-            return "redirect:/";
+            return "redirect:/admin/scholar-list";
         } else {
             model.addAttribute("errormessage", "Data Tidak Ada, Masukan Data Lain");
             return "redirect:/error";
@@ -86,9 +82,9 @@ public class MemberService {
             }
         }
         if (isThere) {
-            model.addAttribute("isLogin", AuthService.isAdminLogin);
+            model.addAttribute("isLogin", AuthConfig.isAdminLogin);
             model.addAttribute("update", member);
-            return "update";
+            return "/admin/update";
         } else {
             model.addAttribute("errormessage", "Data Tidak Ada, Masukan Data Lain");
             System.out.println("Error Mas");
@@ -103,7 +99,7 @@ public class MemberService {
         } catch (Exception e) {
             System.out.println(e.getLocalizedMessage());
         }
-        return "redirect:/";
+        return "redirect:/admin/scholar-list";
     }
     public String find(String nama, Model model) {
         // List<Member> members = memberRepository.findAll();
@@ -113,7 +109,7 @@ public class MemberService {
         //         m.add(member);
         //     }
         // }
-        model.addAttribute("isLogin", AuthService.isAdminLogin);
+        model.addAttribute("isLogin", AuthConfig.isAdminLogin);
         model.addAttribute("all", memberRepository.findByNameContainingIgnoreCase(nama,Sort.by(Sort.Direction.ASC, "name")));
         return "find";
     }
