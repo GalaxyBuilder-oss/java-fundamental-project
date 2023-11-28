@@ -17,19 +17,21 @@ public class AuthService extends ServiceConfig{
         for (Auth user:all) {
             if (username.equalsIgnoreCase(user.getUsername())&&password.equalsIgnoreCase(user.getPassword())) {
                 if(user.getRole().equalsIgnoreCase("admin")) AuthConfig.isAdminLogin=true;
+                // else if(user.getRole().equalsIgnoreCase("bendahara")){AuthConfig.isAdminLogin=true;AuthConfig.role=user.getRole();}
                 else AuthConfig.isUserLogin=true;
+                AuthConfig.isLogin=true;
                 break;
             }
         }
     }
     if(AuthConfig.isAdminLogin) {
-            AuthConfig.isLogin=true;
-            return "redirect:/admin/";
-        } else if(AuthConfig.isUserLogin){
-            AuthConfig.isLogin=true;
-            return "redirect:/user/";
-        } else model.addAttribute("errormessage","Account Not Found!");
-        return "error";
+        // if(AuthConfig.role.equalsIgnoreCase("bendahara"))return "redirect:/bendahara/";
+        return "redirect:/admin/";
+    } else if(AuthConfig.isUserLogin){
+        AuthConfig.isLogin=true;
+        return "redirect:/user/";
+    } else model.addAttribute("errormessage","Account Not Found!");
+    return "error";
     }
     public String add(Model model) {
         Auth auth = new Auth();

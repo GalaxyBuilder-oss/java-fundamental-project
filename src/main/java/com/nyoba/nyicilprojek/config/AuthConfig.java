@@ -25,4 +25,5 @@ public class AuthConfig {
     public static boolean isAdminLogin=false;
     public static boolean isUserLogin=false;
     public static boolean isLogin=false;
+    public static String role="admin";
 }

@@ -17,7 +17,7 @@ public class MemberController extends AuthConfig {
         model.addAttribute("isLogin", isLogin);
         return "index";
     }
-    @GetMapping("/divition-list")
+    @GetMapping("/divition-list/")
     public String divitionList(){
         if(isLogin) return "divition-list";
         return "login";
