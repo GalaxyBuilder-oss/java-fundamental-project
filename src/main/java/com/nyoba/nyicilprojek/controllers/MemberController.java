@@ -12,6 +12,11 @@ import com.nyoba.nyicilprojek.config.AuthConfig;
 @Controller
 public class MemberController extends AuthConfig {
 
+    @GetMapping("/admin/")
+    public String homeAdmin(Model model) {
+        model.addAttribute("isLogin", isLogin);
+        return "index";
+    }
     @GetMapping("/")
     public String home(Model model) {
         model.addAttribute("isLogin", isLogin);

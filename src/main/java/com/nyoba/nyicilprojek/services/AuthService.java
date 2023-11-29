@@ -2,6 +2,8 @@ package com.nyoba.nyicilprojek.services;
 
 import java.util.List;
 import org.springframework.ui.Model;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.nyoba.nyicilprojek.models.Auth;
@@ -52,13 +54,13 @@ public class AuthService extends ServiceConfig{
             model.addAttribute("errormessage", "Data Telah Ada, Masukan Data Lain");
             return "error";
         } else {
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             Auth auth = new Auth();
             auth.setId(a.getId());
             auth.setUsername(a.getUsername());
-            Integer p = a.getPassword().hashCode();
-            auth.setPassword(p.toString());
+            auth.setPassword(passwordEncoder.encode(a.getPassword()));
             auth.setRole(a.getRole());
-            authRepository.save(a);
+            authRepository.save(auth);
             return "redirect:/auth/add/";
         }
     }

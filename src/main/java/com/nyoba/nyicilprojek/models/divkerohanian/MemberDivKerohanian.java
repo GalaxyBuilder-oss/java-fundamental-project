@@ -1,6 +1,7 @@
-package com.nyoba.nyicilprojek.models.divkesehatan;
+package com.nyoba.nyicilprojek.models.divkerohanian;
 
-import java.util.UUID;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.nyoba.nyicilprojek.models.Member;
 
@@ -14,12 +15,12 @@ import lombok.Data;
 
 @Data
 @Entity
-public class MemberDivition {
+public class MemberDivKerohanian {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     @OneToMany
-    @JoinColumn(name = "id_member",referencedColumnName = "id")
-    private Member idMember;
+    @JoinColumn(name = "id_memberkerohanian",referencedColumnName = "id")
+    private Set<Member> idMemberKerohanian=new HashSet<>();
     private String role;
 }

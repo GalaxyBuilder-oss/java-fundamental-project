@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.nyoba.nyicilprojek.config.AuthConfig;
+import com.nyoba.nyicilprojek.models.Chamberlain;
 
 @Controller
 @RequestMapping("/bendahara")
@@ -20,5 +21,20 @@ public class BendaharaController extends AuthConfig {
         else if(isAdminLogin) return "redirect:/admin/";
         else if(isUserLogin) return "redirect:/user/";
         return "redirect:/login/";
+    }
+    @GetMapping("/list/")
+    public String listPendapatanPengeluaran(){
+
+        return "bendahara/list";
+    }
+    @GetMapping("/add/")
+    public String addData(Model model){
+        // {
+            Chamberlain bendahara = new Chamberlain();
+            model.addAttribute("isLogin",isAdminLogin);
+            model.addAttribute("data",bendahara);
+            return "bendahara/add";
+        // }
+        // return "redirect:/login/";
     }
 }

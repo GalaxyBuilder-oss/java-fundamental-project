@@ -15,7 +15,7 @@ import com.nyoba.nyicilprojek.models.Member;
 import com.nyoba.nyicilprojek.services.AdminService;
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/admin2")
 public class AdminController extends AuthConfig {
 
     @Autowired

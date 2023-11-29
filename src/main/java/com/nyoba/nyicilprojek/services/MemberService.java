@@ -45,7 +45,7 @@ public class MemberService extends ServiceConfig {
         }}
         if (isThere) {
             model.addAttribute("errormessage", "Data Telah Ada, Masukan Data Lain");
-            return "redirect:/error";
+            return "error";
         } else {
             memberRepository.save(m);
             return "redirect:/admin/add";
