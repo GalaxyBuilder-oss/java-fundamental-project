@@ -1,7 +1,5 @@
 package com.nyoba.nyicilprojek.models;
 
-import java.util.UUID;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,8 +10,8 @@ import lombok.Data;
 @Data
 public class Member {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String nim;
     private String name;
     private String address;

@@ -1,6 +1,5 @@
-package com.nyoba.nyicilprojek.models;
+package com.nyoba.nyicilprojek.models.chamberlain;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -9,14 +8,12 @@ import lombok.Data;
 
 @Data
 @Entity
-public class Chamberlain {
+public class PUBBalance {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private long income;
-    private long expense;
     private String date;
-
-    @Column(columnDefinition = "TEXT")
-    private String description;
+    private long savingBalance;
+    private long usedBalance;
+    private long totalBalance;
 }

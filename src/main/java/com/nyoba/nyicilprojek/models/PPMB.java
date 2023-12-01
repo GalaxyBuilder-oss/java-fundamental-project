@@ -1,6 +1,7 @@
 package com.nyoba.nyicilprojek.models;
 
 import java.util.Set;
+
 import java.util.HashSet;
 
 import jakarta.persistence.Id;
@@ -19,6 +20,6 @@ public class PPMB {
     private Long id;
     private String tpa_area;
     @OneToMany
-    @JoinColumn(name="id_memberppmb",referencedColumnName = "id")
+    @JoinColumn(name="id_memberppmb",referencedColumnName = "nim")
     private Set<Member> idMemberPPMB=new HashSet<>();
 }

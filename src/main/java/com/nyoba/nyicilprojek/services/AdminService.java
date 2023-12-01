@@ -1,8 +1,6 @@
 package com.nyoba.nyicilprojek.services;
 
 import java.util.List;
-import java.util.UUID;
-
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -52,7 +50,7 @@ public class AdminService extends ServiceConfig {
         }
     }
 
-    public String delete(UUID id, Model model) {
+    public String delete(Long id, Model model) {
         List<Member> members = memberRepository.findAll();
         boolean isThere = false;
         for (Member m : members) {
@@ -70,7 +68,7 @@ public class AdminService extends ServiceConfig {
         }
     }
 
-    public String update(UUID id, Model model) {
+    public String update(Long id, Model model) {
         List<Member> members = memberRepository.findAll();
         Member member = memberRepository.getReferenceById(id);
         boolean isThere = false;

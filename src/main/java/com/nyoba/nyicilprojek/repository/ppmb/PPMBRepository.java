@@ -1,4 +1,4 @@
-package com.nyoba.nyicilprojek.repository;
+package com.nyoba.nyicilprojek.repository.ppmb;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

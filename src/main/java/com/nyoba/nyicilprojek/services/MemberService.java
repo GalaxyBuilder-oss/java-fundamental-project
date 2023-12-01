@@ -1,8 +1,6 @@
 package com.nyoba.nyicilprojek.services;
 
 import java.util.List;
-import java.util.UUID;
-
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -52,7 +50,7 @@ public class MemberService extends ServiceConfig {
         }
     }
 
-    public String delete(UUID id, Model model) {
+    public String delete(Long id, Model model) {
         List<Member> members = memberRepository.findAll();
         boolean isThere = false;
         for (Member m : members) {
@@ -70,10 +68,9 @@ public class MemberService extends ServiceConfig {
         }
     }
 
-    public String update(UUID id, Model model) {
+    public String update(Long id, Model model) {
         List<Member> members = memberRepository.findAll();
         Member member = memberRepository.getReferenceById(id);
-        // Member member =  new Member();
         boolean isThere = false;
         for (Member m:members) {
             if (m.getId().equals(id)) {
@@ -102,13 +99,6 @@ public class MemberService extends ServiceConfig {
         return "redirect:/admin/scholar-list";
     }
     public String find(String nama, Model model) {
-        // List<Member> members = memberRepository.findAll();
-        // List<Member> m = new ArrayList<>();
-        // for (Member member : members) {
-        //     if (member.getName().contains(nama)) {
-        //         m.add(member);
-        //     }
-        // }
         model.addAttribute("isLogin", AuthConfig.isAdminLogin);
         model.addAttribute("all", memberRepository.findByNameContainingIgnoreCase(nama,Sort.by(Sort.Direction.ASC, "name")));
         return "find";

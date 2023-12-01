@@ -1,7 +1,5 @@
 package com.nyoba.nyicilprojek.controllers;
 
-import java.util.UUID;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +13,7 @@ import com.nyoba.nyicilprojek.models.Member;
 import com.nyoba.nyicilprojek.services.AdminService;
 
 @Controller
-@RequestMapping("/admin2")
+@RequestMapping("/admin")
 public class AdminController extends AuthConfig {
 
     @Autowired
@@ -23,47 +21,31 @@ public class AdminController extends AuthConfig {
 
     @GetMapping("/")
     public String home(Model model) {
-        if(isAdminLogin){
-            model.addAttribute("isLogin", AuthConfig.isAdminLogin);
-            return "/admin/index";
-        }
-        else if(isUserLogin) return "redirect:/user/";
-        return "redirect:/login/";
+        model.addAttribute("isLogin", true);
+        return "/admin/index";
     }
     @GetMapping("/scholar-list/")
     public String all(Model model) {
-        if(isAdminLogin) return adminService.showAll(model);
-        else if(isUserLogin) return "redirect:/user/";
-        return "redirect:/";
+         return adminService.showAll(model);
     }
     @GetMapping("/add/")
     public String add(Model model) {
-        if(isAdminLogin) return adminService.add(model);
-        else if(isUserLogin) return "redirect:/user/";
-        return "redirect:/login/";
+         return adminService.add(model);
     }
     @PostMapping("/save")
     public String save(Member member, Model model) {
-        if(isAdminLogin) return adminService.save(member, model);
-        else if(isUserLogin) return "redirect:/user/";
-        return "redirect:/login/";
+         return adminService.save(member, model);
     }
     @GetMapping("/delete/{id}")
-    public String delete(@PathVariable(value="id")UUID id, Model model) {
-        if(isAdminLogin) return adminService.delete(id, model);
-        else if(isUserLogin) return "redirect:/user/";
-        return "redirect:/login/";
+    public String delete(@PathVariable(value="id")Long id, Model model) {
+         return adminService.delete(id, model);
     }
     @GetMapping("/update/{id}")
-    public String update(@PathVariable(name="id")UUID id, Model model) {
-        if(isAdminLogin) return adminService.update(id,model);
-        else if(isUserLogin) return "redirect:/user/";
-        return "redirect:/login/";
+    public String update(@PathVariable(name="id")Long id, Model model) {
+         return adminService.update(id,model);
     }
     @PostMapping("/saveUpdate")
     public String saveUpdaString(Member member) {
-        if(isAdminLogin) return adminService.saveUpdate(member);
-        else if(isUserLogin) return "redirect:/user/";
-        return "redirect:/";
+         return adminService.saveUpdate(member);
     }
 }

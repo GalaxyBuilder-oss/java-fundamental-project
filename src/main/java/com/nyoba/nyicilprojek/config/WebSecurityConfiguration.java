@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -26,18 +27,25 @@ public class WebSecurityConfiguration {
 
         return provider;
     }
-
+    @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        // http.authorizeHttpRequests(x -> x
-        //     .requestMatchers("/")
-        //     .permitAll()
-        // );
-        http
-            .authorizeHttpRequests((authorize) -> {
-                authorize.requestMatchers("/**").hasAuthority("ADMIN");
-                authorize.anyRequest().authenticated();
-            });
-        return http.build();
+        try {
+            http
+                .securityMatcher("/")
+                .authorizeHttpRequests(authorize -> authorize
+				.requestMatchers(new AntPathRequestMatcher("/")).permitAll()
+				.requestMatchers(new AntPathRequestMatcher("/admin/")).hasAuthority("ADMIN")
+                .requestMatchers(new AntPathRequestMatcher("/user/")).hasAuthority("USER")
+				.anyRequest().authenticated())
+                .httpBasic(basic->basic
+                .init(http));
+            return http.build();
+            // return http.build();
+            
+        } catch (Exception e) {
+            System.out.println(e.getLocalizedMessage());
+            return http.build();
+        }
     }
 
 }
