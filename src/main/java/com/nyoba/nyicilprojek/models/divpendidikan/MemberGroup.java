@@ -1,8 +1,5 @@
 package com.nyoba.nyicilprojek.models.divpendidikan;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import com.nyoba.nyicilprojek.models.Member;
 
 import jakarta.persistence.Column;
@@ -11,7 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToOne;
 import lombok.Data;
 
 @Entity
@@ -21,12 +18,12 @@ public class MemberGroup {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private int value;
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "id_memberpendidikanpelatihan", referencedColumnName = "id")
-    private Set<Member> idMemberPendidikanPelatihan=new HashSet<>();
+    private Member idMember;
     @Column(columnDefinition = "TEXT")
     private String description;
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "id_grouppendidikanpelatihan", referencedColumnName = "id")
-    private Set<Kelompok> idGroupPendidikanPelatihan=new HashSet<>();
+    private Kelompok idGroup;
 }

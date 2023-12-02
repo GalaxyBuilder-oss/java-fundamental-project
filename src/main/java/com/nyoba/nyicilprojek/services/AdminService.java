@@ -17,10 +17,10 @@ public class AdminService extends ServiceConfig {
             model.addAttribute("isLogin", AuthConfig.isAdminLogin);
             model.addAttribute("all", memberRepository.findAll(Sort.by(Sort.Direction.ASC, "name")));
             model.addAttribute("count",memberRepository.count());
-            return "/admin/scholar-list";
+            return "admin/scholar-list";
         } else {
             model.addAttribute("allNull", null);
-            return "redirect:/admin/add";
+            return "redirect:/admin/add/";
         }
     }
 
@@ -28,7 +28,7 @@ public class AdminService extends ServiceConfig {
         Member member = new Member();
         model.addAttribute("isLogin", AuthConfig.isAdminLogin);
         model.addAttribute("add", member);
-        return "/admin/add";
+        return "admin/add";
     }
 
     public String save(Member m, Model model) {
@@ -43,10 +43,10 @@ public class AdminService extends ServiceConfig {
         }}
         if (isThere) {
             model.addAttribute("errormessage", "Data Telah Ada, Masukan Data Lain");
-            return "redirect:/error";
+            return "error";
         } else {
             memberRepository.save(m);
-            return "redirect:/admin/add";
+            return "redirect:/admin/add/";
         }
     }
 
@@ -61,10 +61,10 @@ public class AdminService extends ServiceConfig {
         }
         if (isThere) {
             memberRepository.deleteById(id);
-            return "redirect:/admin/scholar-list";
+            return "redirect:/admin/scholar-list/";
         } else {
             model.addAttribute("errormessage", "Data Tidak Ada, Masukan Data Lain");
-            return "redirect:/error";
+            return "error";
         }
     }
 
@@ -81,21 +81,16 @@ public class AdminService extends ServiceConfig {
         if (isThere) {
             model.addAttribute("isLogin", AuthConfig.isAdminLogin);
             model.addAttribute("update", member);
-            return "/admin/update";
+            return "admin/update";
         } else {
             model.addAttribute("errormessage", "Data Tidak Ada, Masukan Data Lain");
             System.out.println("Error Mas");
-            return "redirect:/error";
+            return "error";
         }
     }
 
     public String saveUpdate(Member member) {
-        try {
-            memberRepository.save(member);
-            
-        } catch (Exception e) {
-            System.out.println(e.getLocalizedMessage());
-        }
-        return "redirect:/admin/scholar-list";
+        memberRepository.save(member);
+        return "redirect:/admin/scholar-list/";
     }
 }

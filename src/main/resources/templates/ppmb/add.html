@@ -14,8 +14,8 @@
         </div>
         <form th:action="@{/ppmb/post}" method="post">
             <input type="text" name="" th:field="${add.tpa_area}" id="">
-            <select th:field="${add.idMemberPPMB}">
-                <option th:each="m : ${member}" th:value="${m.nim}" th:text="${m.name+'-'m.id}"></option>
+            <select th:field="${add.idMember}">
+                <option th:each="m : ${member}" th:value="${m.id}" th:text="${m.name}"></option>
             </select>
             <input type="submit" value="Simpan">
         </form>
