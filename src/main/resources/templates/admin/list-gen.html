@@ -13,33 +13,23 @@
             <thead>
                 <tr>
                     <!-- <th>ID</th> -->
-                    <th>NIM</th>
-                    <th>NAMA MAHASISWA</th>
-                    <th>ALAMAT</th>
+                    <th>NO</th>
+                    <th>NAMA ANGKATAN</th>
                     <th>DESKRIPSI</th>
-                    <th>TAHUN MASUK</th>
-                    <th></th>
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="anggota : ${all}" th:object="${anggota}">
+                <tr th:each="gen,n : ${all}" th:object="${gen}">
                     <!-- <td th:text="*{id}"></td> -->
-                    <td th:text="*{nim}"></td>
+                    <td th:text="${n.count}"></td>
                     <td th:text="*{name}"></td>
-                    <td th:text="*{address}"></td>
                     <td th:text="*{description}"></td>
-                    <td th:text="*{ryear}"></td>
                     <td>
                         <a
-                            th:href="@{/admin/update/{id}(id = *{id})}" class="btn btn-info">Update</a> | <a th:href="@{/admin/delete/{id}(id = *{id})}" class="btn btn-danger">Hapus</a>
+                            th:href="@{/admin/update-gen/{id}(id = *{id})}" class="btn btn-info">Update</a> | <a th:href="@{/admin/delete-gen/{id}(id = *{id})}" class="btn btn-danger">Hapus</a>
                     </td>
                 </tr>
             </tbody>
-            <tfoot>
-                <tr>
-                    <td th:text="${'Jumlah : '+count}"></td>
-                </tr>
-            </tfoot>
         </table>
     </main>
     <script type="text/javascript" th:src="@{js/bootstrap.min.js}"></script>
