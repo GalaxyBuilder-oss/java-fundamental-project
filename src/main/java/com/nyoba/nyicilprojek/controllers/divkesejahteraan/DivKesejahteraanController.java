@@ -57,10 +57,10 @@ public class DivKesejahteraanController {
     }
 
     // Launch And Breakfast
-    @GetMapping("/menu/")
+    @GetMapping("/list-menu/")
     public String foodMenu(Model model){
         model.addAttribute("menu", foodRepository.findAll());
-        return "divkesejahteraan/list-food";
+        return "divkesejahteraan/list-menu";
     }
     @GetMapping("/add-menu/")
     public String addFood(Model model){
@@ -71,12 +71,12 @@ public class DivKesejahteraanController {
     @PostMapping("/save-menu")
     public String saveFood(Food food){
         foodRepository.save(food);
-        return "redirect:/divisi/kesejahteraan/add/";
+        return "redirect:/divisi/kesejahteraan/add-menu/";
     }
     @GetMapping("/delete-menu/{id}")
     public String deleteFood(@PathVariable(value = "id")Long id,Model model){
         foodRepository.deleteById(id);
-        return "redirect:/divisi/kesejahteraan/menu/";
+        return "redirect:/divisi/kesejahteraan/list-menu/";
     }
     @GetMapping("/update-menu/{id}")
     public String updateFood(@PathVariable(value = "id")Long id,Model model){

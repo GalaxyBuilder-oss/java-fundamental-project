@@ -1,7 +1,9 @@
 package com.nyoba.nyicilprojek.services;
 
 import java.util.List;
-import org.springframework.data.domain.Sort;
+
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
@@ -16,7 +18,9 @@ public class AdminService extends ServiceConfig {
     public String showAllMember(Model model) {
         if (!memberRepository.findAll().isEmpty()) {
             model.addAttribute("isLogin", AuthConfig.isAdminLogin);
-            model.addAttribute("all", memberRepository.findAll(Sort.by(Sort.Direction.ASC, "name")));
+            // model.addAttribute("all", memberRepository.findAll(Sort.by(Sort.Direction.ASC, "name")));
+            Pageable page=PageRequest.of(0, 10);
+            model.addAttribute("all",memberPaggingRepository.findAll(page).getContent());
             model.addAttribute("count",memberRepository.count());
             return "admin/list-member";
         } else {
@@ -29,6 +33,7 @@ public class AdminService extends ServiceConfig {
         Member member = new Member();
         model.addAttribute("isLogin", AuthConfig.isAdminLogin);
         model.addAttribute("add", member);
+        model.addAttribute("generation", generationRepository.findAll());
         return "admin/add-member";
     }
 

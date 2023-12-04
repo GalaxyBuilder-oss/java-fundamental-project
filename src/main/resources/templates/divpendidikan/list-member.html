@@ -24,8 +24,8 @@
                     <td th:text="${m.id}"></td>
                     <td th:text="${a.name}"></td>
                     <td th:text="${m.role}"></td>
-                    <td><a href="@{/divisi/pendidikan/delete-m/{id}(id=${m.id})}">Hapus</a></td>
-                    <td><a href="@{/divisi/pendidikan/update-m/{id}(id=${m.id})}">update</a></td>
+                    <td><a th:href="@{/divisi/pendidikan/delete-m/{id}(id=${m.id})}">Hapus</a></td>
+                    <td><a th:href="@{/divisi/pendidikan/update-m/{id}(id=${m.id})}">update</a></td>
                 </tr>
             </div>
         </table>

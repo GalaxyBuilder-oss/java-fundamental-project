@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="~{fragments/common :: head}">
+    <title th:text="#{app.name}"></title>
+</head>
+
+<body>
+    <!-- <div th:replace="~{ fragments/common :: (${user.isAdmin}? #{header.admin} : #{header.normaluser}) }"></div> -->
+    <header th:insert="~{fragments/header_page :: common}"></header>
+    <main class="container-fluid">
+        <div class="banner mx-auto">
+            anggap ini banner
+        </div>
+            <div class="list-group">
+            <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+              Divisi
+            </a>
+            <a href="/divisi/pendidikan/" class="list-group-item list-group-item-action">Divisi Pendidikan</a>
+            <a href="/divisi/pelatihaninggris/" class="list-group-item list-group-item-action">Divisi Pelatihan Bahasa Inggris</a>
+            <a href="/divisi/kerohanian/" class="list-group-item list-group-item-action">Divisi Kerohanian</a>
+            <a href="/divisi/kesejahteraan/" class="list-group-item list-group-item-action">Divisi Kesejahteraan</a>
+            <a href="/divisi/kesehatan/" class="list-group-item list-group-item-action">Divisi Kesehatan</a>
+            <a href="/divisi/kebersihan/" class="list-group-item list-group-item-action">Divisi Kebersihan</a>
+            <a href="/divisi/keasramaan/" class="list-group-item list-group-item-action">Divisi Keasramaan</a>
+          </div>
+    </main>
+    <div th:replace="~{fragments/common :: script}"></div>
+    <footer th:replace="~{fragments/footer_page :: common}"></footer>
+</body>
+
+</html>

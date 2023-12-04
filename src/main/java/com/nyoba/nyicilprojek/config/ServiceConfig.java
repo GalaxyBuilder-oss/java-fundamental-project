@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.nyoba.nyicilprojek.repository.AuthRepository;
 import com.nyoba.nyicilprojek.repository.GenerationRepository;
+import com.nyoba.nyicilprojek.repository.MemberPaggingRepository;
 import com.nyoba.nyicilprojek.repository.MemberRepository;
 
 public class ServiceConfig {
@@ -13,4 +14,6 @@ public class ServiceConfig {
     public MemberRepository memberRepository;
     @Autowired
     public GenerationRepository generationRepository;
+    @Autowired
+    public MemberPaggingRepository memberPaggingRepository;
 }

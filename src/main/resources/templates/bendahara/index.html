@@ -12,7 +12,7 @@
         <div class="banner mx-auto">
             anggap ini banner
         </div>
-        <a th:href="@{/auth/add}">Login Sebagai Bendahara</a>
+        <a th:href="@{/bendahara/list/}">Login Sebagai Bendahara</a>
     </main>
     <div th:replace="~{fragments/common :: script}"></div>
     <footer th:replace="~{fragments/footer_page :: (${isLogin}) ? footerlogin : footernologin}"></footer>

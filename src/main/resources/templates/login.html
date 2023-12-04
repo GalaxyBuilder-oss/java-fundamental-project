@@ -6,26 +6,64 @@
 </head>
 
 <body>
-    <header th:replace="~{fragments/header_page:: headernologin}"></header>
-    <main class="container-fluid">
-        <div class="container shadow-sm w-25 p-5 mx-auto my-5 bg-body rounded">
-            <form th:action="@{/loginin}" method="post">
-            <div class="form-floating col mb-3">
-                <input type="text" class="form-control" name="username" id="username" />
-                <label for="username">Masukkan Nama Pengguna</label>
+    <header th:replace="~{fragments/header_page:: common}"></header>
+    <main>
+        <section class="vh-100">
+            <div class="container py-5 h-100">
+                <div class="row d-flex align-items-center justify-content-center h-100">
+                    <div class="col-md-8 col-lg-7 col-xl-6 h-30">
+                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+                            class="img-fluid" alt="Phone image">
+                    </div>
+                    <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1 shadow-sm p-4">
+                        <h3>Login Form</h3>
+                        <form th:action="@{/login}" method="post">
+                            <!-- Username input -->
+                            <div class="form-outline mb-4">
+                                <input type="text" id="user-field" class="form-control form-control-lg" name="username" pattern="[a-zA-Z0-9]+" required />
+                                <label class="form-label" for="user-field">Nama Pengguna</label>
+                            </div>
+
+                            <!-- Password input -->
+                            <div class="form-outline mb-4">
+                                <input type="password" id="password" class="form-control form-control-lg" name="password" pattern="[a-zA-Z0-9]+" required />
+                                <label class="form-label" for="password">Kata Sandi</label>
+                            </div>
+
+                            <!-- Submit button -->
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">Masuk</button>
+                        </form>
+                        <div th:if="${param.error}">
+                            Nama Pengguna Dan Password Tidak Valid.</div>
+                        <div th:if="${param.logout}">
+                            Anda Telah Keluar.</div>
+                    </div>
+                </div>
             </div>
-            <div class="form-floating col mb-3">
-                <input type="password" class="form-control" name="password" id="password" />
-                <label for="password">Masukkan Password</label>
-            </div>
+        </section>
+        <!-- <div class="container shadow-sm w-25 p-5 mx-auto my-5 bg-body rounded">
+            <h1>Please Log In</h1>
+            <div th:if="${param.error}">
+                Invalid username and password.</div>
+            <div th:if="${param.logout}">
+                You have been logged out.</div>
+            <form th:action="@{/login}" method="post">
+                <div class="form-floating col mb-3">
+                    <input type="text" class="form-control" name="username" id="username" />
+                    <label for="username">Masukkan Nama Pengguna</label>
+                </div>
+                <div class="form-floating col mb-3">
+                    <input type="password" class="form-control" name="password" id="password" />
+                    <label for="password">Masukkan Password</label>
+                </div>
                 <input type="submit" class="btn btn-success rounded mx-3" value="Masuk">
                 <input type="reset" class="btn btn-danger rounded mx-3" value="Reset">
-        </form>
-    </div>
+            </form>
+        </div> -->
     </main>
     <script type="text/javascript" th:src="@{js/bootstrap.min.js}"></script>
     <!-- <script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"></script> -->
-    <footer th:replace="~{fragments/common :: footer}"></footer>
+    <footer th:replace="~{fragments/footer_page :: common}"></footer>
 </body>
 
 </html>

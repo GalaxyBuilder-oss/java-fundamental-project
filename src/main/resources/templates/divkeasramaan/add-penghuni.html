@@ -12,7 +12,7 @@
         <div class="banner mx-auto">
             anggap ini banner
         </div>
-        <form th:action="@{/divisi/keasramaan/save}" method="post" th:object="${add}">
+        <form th:action="@{/divisi/keasramaan/save-penghuni}" method="post" th:object="${add}">
             <select th:field="*{idmember}" id="">
                 <option th:each="m : ${member}" th:value="${m.id}" th:text="${m.name}"></option>
             </select>

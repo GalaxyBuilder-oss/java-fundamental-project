@@ -14,7 +14,7 @@ public class AuthService extends ServiceConfig{
     public String add(Model model) {
         Auth auth = new Auth();
         model.addAttribute("add", auth);
-        return "/auth/add";
+        return "auth/add";
     }
     public String save(Auth a, Model model) {
         boolean isThere = false;

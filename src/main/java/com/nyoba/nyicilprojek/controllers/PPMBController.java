@@ -26,7 +26,7 @@ public class PPMBController {
         model.addAttribute("isLogin",true);
         return "ppmb/index";
     }
-    @GetMapping("/list")
+    @GetMapping("/list/")
     public String agendaList(Model model){
         model.addAttribute("data", ppmbRepository.findAll());
         return "ppmb/list";

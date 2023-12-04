@@ -19,5 +19,5 @@ public class Vocab {
     @ManyToOne
     @JoinColumn(name = "id_memberpeltihaninggris",referencedColumnName = "id")
     private Member idMember;
-    private String role;
+    private String vocab;
 }

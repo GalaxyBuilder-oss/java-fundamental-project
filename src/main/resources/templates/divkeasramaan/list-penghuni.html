@@ -16,13 +16,15 @@
             <tr>
                 <th>NO</th>
                 <th>NAMA</th>
-                <th>JABATAN</th>
+                <th>ASRAMA</th>
+                <th>KETERANGAN</th>
             </tr>
             <div th:each="m,n : ${member}">
-                <tr th:each="a : ${m.idMember}">
+                <tr th:each="a : ${m.idmember}">
                     <td th:text="${n.count}"></td>
                     <td th:text="${a.name}"></td>
-                    <td th:text="${m.role}"></td>
+                    <td th:text="${m.dorm}"></td>
+                    <td th:text="${m.description}"></td>
                     <td><a th:href="@{/divisi/keasramaan/delete/{id}(id=${m.id})}">Hapus</a></td>
                     <td><a th:href="@{/divisi/keasramaan/update/{id}(id=${m.id})}">Update</a></td>
                 </tr>

@@ -103,4 +103,8 @@ public class MemberService extends ServiceConfig {
         model.addAttribute("all", memberRepository.findByNameContainingIgnoreCase(nama,Sort.by(Sort.Direction.ASC, "name")));
         return "find";
     }
+    // public List<Member> findName(String name){
+    //     if(name!=null) return memberRepository.search(name);
+    //     return memberRepository.findAll();
+    // }
 }
