@@ -7,7 +7,7 @@
 </head>
 
 <body>
-    <header th:replace="~{fragments/header_page :: headerlogin}"></header>
+    <header th:replace="~{fragments/header_page :: admin}"></header>
     <main class="container-fluid">
         <form th:action="@{/admin/save-gen}" method="post" th:object="${add}">
 
@@ -30,7 +30,7 @@
     </main>
     <script th:src="@{/js/bootstrap.min.js}"></script>
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
-    <footer th:replace="~{fragments/common :: footer}"></footer>
+    <footer th:replace="~{fragments/footer_page :: admin}"></footer>
 </body>
 
 </html>

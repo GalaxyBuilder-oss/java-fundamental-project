@@ -11,7 +11,7 @@ import lombok.Data;
 @Entity
 public class Secretary {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(columnDefinition = "TEXT")
     private String agenda;

@@ -19,28 +19,29 @@ public class SecretaryController {
     private SecretaryRepository secretaryRepository;
     @GetMapping("/")
     public String home(Model model) {
-        model.addAttribute("isLogin",true);
+        model.addAttribute("agenda", secretaryRepository.findAll());
+        model.addAttribute("add", new Secretary());
         return "secretary/index";
     }
-    @GetMapping("/agenda/")
-    public String agenda(Model model){
-        model.addAttribute("agenda", secretaryRepository.findAll());
-        return "secretary/list-agenda";
-    }
-    @GetMapping("/add/")
-    public String addAgenda(Model model){
-        Secretary agenda=new Secretary();
-        model.addAttribute("add", agenda);
-        return "secretary/add-agenda";
-    }
+    // @GetMapping("/agenda/")
+    // public String agenda(Model model){
+    //     model.addAttribute("agenda", secretaryRepository.findAll());
+    //     return "secretary/list-agenda";
+    // }
+    // @GetMapping("/add/")
+    // public String addAgenda(Model model){
+    //     Secretary agenda=new Secretary();
+    //     model.addAttribute("add", agenda);
+    //     return "secretary/add-agenda";
+    // }
     @PostMapping("/save")
     public String saveAgenda(Secretary agenda){
         secretaryRepository.save(agenda);
-        return "redirect:/sekretaris/add/";
+        return "redirect:/sekretaris/";
     }
     @GetMapping("/delete/{id}")
     public String deleteString(@PathVariable(value = "id")Long id,Model model){
         secretaryRepository.deleteById(id);
-        return "redirect:/sekretaris/agenda/";
+        return "redirect:/sekretaris/";
     }
 }

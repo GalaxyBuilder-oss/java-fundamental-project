@@ -40,12 +40,12 @@ public class WebSecurityConfiguration {
         http.authorizeHttpRequests(authorize -> authorize
                 .requestMatchers("/login", "/", "/auth/").permitAll()
                 .requestMatchers("/css/**", "/js/**", "/img/**").permitAll()
-                .requestMatchers("/admin/**", "/divisi/**", "/bendahara/**", "/sekretaris/**", "/ppmb/**")
-                .hasAuthority("ADMIN")
+                .requestMatchers("/admin/**")
+                .hasAnyAuthority("ADMIN")
                 .requestMatchers("/user/**").hasAuthority("USER")
-                .requestMatchers("/bendahara/**").hasAuthority("BENDAHARA")
-                .requestMatchers("/sekretaris/**").hasAuthority("SEKRETARIS")
-                .requestMatchers("/ppmb/**").hasAuthority("PPMB")
+                .requestMatchers("/bendahara/**").hasAnyAuthority("BENDAHARA","ADMIN")
+                .requestMatchers("/sekretaris/**").hasAnyAuthority("SEKRETARIS","ADMIN")
+                .requestMatchers("/ppmb/**").hasAnyAuthority("PPMB","ADMIN")
                 .anyRequest().authenticated())
                 .formLogin((form) -> form
                         .loginPage("/login").permitAll()
@@ -62,7 +62,7 @@ public class WebSecurityConfiguration {
                                 else if(authentication.getName().equalsIgnoreCase("BENDAHARA"))
                                     response.sendRedirect("/bendahara/");
                                 else if (authentication.getName().equalsIgnoreCase("SEKRETARIS"))
-                                    response.sendRedirect("/sektretaris/");
+                                    response.sendRedirect("/sekretaris/");
                                 else if (authentication.getName().equalsIgnoreCase("PPMB"))
                                     response.sendRedirect("/ppmb/");
                                 else response.sendRedirect("/");

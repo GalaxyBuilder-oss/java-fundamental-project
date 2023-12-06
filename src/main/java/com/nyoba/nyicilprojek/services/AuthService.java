@@ -14,7 +14,7 @@ public class AuthService extends ServiceConfig{
     public String add(Model model) {
         Auth auth = new Auth();
         model.addAttribute("add", auth);
-        return "auth/add";
+        return "admin/add-auth";
     }
     public String save(Auth a, Model model) {
         boolean isThere = false;
@@ -37,7 +37,7 @@ public class AuthService extends ServiceConfig{
             auth.setPassword(passwordEncoder.encode(a.getPassword()));
             auth.setRole(a.getRole().toUpperCase());
             authRepository.save(auth);
-            return "redirect:/auth/add/";
+            return "redirect:/admin/";
         }
     }
 }

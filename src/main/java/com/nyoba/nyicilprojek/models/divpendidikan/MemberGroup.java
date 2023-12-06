@@ -15,7 +15,7 @@ import lombok.Data;
 @Data
 public class MemberGroup {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private int value;
     @ManyToOne

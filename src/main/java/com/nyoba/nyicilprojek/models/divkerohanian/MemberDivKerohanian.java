@@ -14,7 +14,7 @@ import lombok.Data;
 @Entity
 public class MemberDivKerohanian {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
     @JoinColumn(name = "id_memberkerohanian",referencedColumnName = "id")

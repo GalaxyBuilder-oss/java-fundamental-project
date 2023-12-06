@@ -23,29 +23,20 @@ public class PPMBController {
     private MemberRepository memberRepository;
     @GetMapping("/")
     public String home(Model model) {
-        model.addAttribute("isLogin",true);
-        return "ppmb/index";
-    }
-    @GetMapping("/list/")
-    public String agendaList(Model model){
         model.addAttribute("data", ppmbRepository.findAll());
-        return "ppmb/list";
-    }
-    @GetMapping("/add/")
-    public String add(Model model){
-        PPMB ppmb=new PPMB();
         model.addAttribute("member", memberRepository.findAll(Sort.by(Sort.Direction.ASC, "name")));
-        model.addAttribute("add", ppmb);
-        return "ppmb/add";
+        model.addAttribute("add", new PPMB());
+        return "ppmb/index";
     }
     @PostMapping("/post")
     public String save(PPMB ppmb){
-        ppmbRepository.save(ppmb);
-        return "redirect:/ppmb/add/";
+        PPMB save=ppmb;
+        ppmbRepository.save(save);
+        return "redirect:/ppmb/";
     }
     @GetMapping("/delete/{id}")
     public String deleteString(@PathVariable(value = "id")Long id,Model model){
         ppmbRepository.deleteById(id);
-        return "redirect:/ppmb/list/";
+        return "redirect:/ppmb/";
     }
 }

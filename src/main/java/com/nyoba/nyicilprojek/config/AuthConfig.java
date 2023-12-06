@@ -1,9 +1,9 @@
 package com.nyoba.nyicilprojek.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import com.nyoba.nyicilprojek.repository.AuthRepository;
 import com.nyoba.nyicilprojek.repository.MemberRepository;
+import com.nyoba.nyicilprojek.repository.GenerationRepository;
 
 import com.nyoba.nyicilprojek.services.AuthService;
 import com.nyoba.nyicilprojek.services.MemberService;
@@ -14,6 +14,8 @@ public class AuthConfig {
     public AuthRepository authRepository;
     @Autowired
     public MemberRepository memberRepository;
+    @Autowired
+    public GenerationRepository genRepository;
 
     @Autowired
     public AuthService authService;

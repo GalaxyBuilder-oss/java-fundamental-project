@@ -11,19 +11,7 @@ import com.nyoba.nyicilprojek.config.ServiceConfig;
 
 @Service
 public class MemberService extends ServiceConfig {
-
-    public String showAll(Model model) {
-        if (!memberRepository.findAll().isEmpty()) {
-            model.addAttribute("isLogin", AuthConfig.isAdminLogin);
-            model.addAttribute("all", memberRepository.findAll(Sort.by(Sort.Direction.ASC, "name")));
-            model.addAttribute("count",memberRepository.count());
-            return "/admin/scholar-list";
-        } else {
-            model.addAttribute("allNull", null);
-            return "redirect:/admin/add";
-        }
-    }
-
+    
     public String add(Model model) {
         Member member = new Member();
         model.addAttribute("isLogin", AuthConfig.isAdminLogin);
@@ -46,7 +34,7 @@ public class MemberService extends ServiceConfig {
             return "error";
         } else {
             memberRepository.save(m);
-            return "redirect:/admin/add";
+            return "redirect:/admin/";
         }
     }
 
@@ -61,7 +49,7 @@ public class MemberService extends ServiceConfig {
         }
         if (isThere) {
             memberRepository.deleteById(id);
-            return "redirect:/admin/scholar-list";
+            return "redirect:/admin/";
         } else {
             model.addAttribute("errormessage", "Data Tidak Ada, Masukan Data Lain");
             return "redirect:/error";
@@ -81,7 +69,7 @@ public class MemberService extends ServiceConfig {
         if (isThere) {
             model.addAttribute("isLogin", AuthConfig.isAdminLogin);
             model.addAttribute("update", member);
-            return "/admin/update";
+            return "/admin/";
         } else {
             model.addAttribute("errormessage", "Data Tidak Ada, Masukan Data Lain");
             System.out.println("Error Mas");
@@ -96,7 +84,7 @@ public class MemberService extends ServiceConfig {
         } catch (Exception e) {
             System.out.println(e.getLocalizedMessage());
         }
-        return "redirect:/admin/scholar-list";
+        return "redirect:/admin/";
     }
     public String find(String nama, Model model) {
         model.addAttribute("isLogin", AuthConfig.isAdminLogin);

@@ -17,3 +17,16 @@ if (alertTrigger) {
     appendAlert('Nice, you triggered this alert message!', 'success')
   })
 }
+function showDataChamberlain(xValues,yValues){
+new Chart("bendahara", {
+  type: "line",
+  data: {
+    labels: xValues,
+    datasets: [{
+      backgroundColor:"rgba(0,0,255,1.0)",
+      borderColor: "rgba(0,0,255,0.1)",
+      data: yValues
+    }]
+  }
+});
+}

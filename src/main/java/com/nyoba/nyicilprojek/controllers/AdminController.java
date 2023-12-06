@@ -1,16 +1,18 @@
 package com.nyoba.nyicilprojek.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.stereotype.Controller;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.data.domain.Sort;
 
 import com.nyoba.nyicilprojek.config.AuthConfig;
 import com.nyoba.nyicilprojek.models.Generation;
 import com.nyoba.nyicilprojek.models.Member;
+import com.nyoba.nyicilprojek.models.Auth;
 import com.nyoba.nyicilprojek.services.AdminService;
 
 @Controller
@@ -22,19 +24,38 @@ public class AdminController extends AuthConfig {
 
      @GetMapping("/")
      public String home(Model model) {
-          model.addAttribute("isLogin", true);
+          model.addAttribute("genlist",genRepository.findAll());
+          model.addAttribute("pubs",memberRepository.findAll(Sort.by(Sort.Direction.ASC, "name")));
+          model.addAttribute("countPUB",memberRepository.count());
+          model.addAttribute("totalAccount",authRepository.count());
+          model.addAttribute("accounts",authRepository.findAll());
           return "admin/index";
+     }
+     @GetMapping("/add/")
+     public String addAuth(Model model) {
+          return authService.add(model);
+     }
+     @PostMapping("/save")
+     public String saveAuth(Auth user,Model model) {
+          return authService.save(user,model);
+     }
+     @GetMapping("/update/{id}")
+     public String updateAuth(@PathVariable("id")Long id,Model model){
+          model.addAttribute("update",authRepository.getReferenceById(id));
+          return "admin/update-auth";
+     }
+     @PostMapping("/save-update")
+     public String saveUpdateAuth(Auth auth){
+          authRepository.save(auth);
+          return "redirect:/admin/";
+     }
+     @GetMapping("/delete/{id}")
+     public String deleteAuth(@PathVariable("id")Long id){
+          authRepository.deleteById(id);
+          return "redirect:/admin/";
      }
 
      //     Member PUB
-    @GetMapping("/list-member/")
-    public String all(Model model) {
-          // List<Member> listMembers=memberService.findName(name);
-          // model.addAttribute("member", listMembers);
-          // model.addAttribute("keyword", name);
-          // return "list-member";
-         return adminService.showAllMember(model);
-    }
 
      @GetMapping("/add-member/")
      public String add(Model model) {
@@ -62,11 +83,6 @@ public class AdminController extends AuthConfig {
      }
 
      //     Angkatan PUB
-
-     @GetMapping("/list-gen/")
-     public String allGen(Model model) {
-          return adminService.showAllGen(model);
-     }
 
      @GetMapping("/add-gen/")
      public String addGen(Model model) {

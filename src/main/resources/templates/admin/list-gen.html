@@ -2,17 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head th:insert="~{fragments/common :: head}">
-    <title th:text="#{app.name}"></title>
 </head>
 
 <body>
-    <!-- <div th:replace="~{../fragments/common :: (${user.isAdmin}? #{header.admin} : #{header.normaluser}) }"></div> -->
-    <header th:insert="~{/fragments/header_page :: (${isLogin}) ? headerlogin : headernologin}"></header>
+    <header th:insert="~{/fragments/header_page :: admin}"></header>
     <main class="container-fluid column">
         <table class="table table-hover w-75 p-2">
             <thead>
                 <tr>
-                    <!-- <th>ID</th> -->
                     <th>NO</th>
                     <th>NAMA ANGKATAN</th>
                     <th>DESKRIPSI</th>
@@ -20,7 +17,6 @@
             </thead>
             <tbody>
                 <tr th:each="gen,n : ${all}" th:object="${gen}">
-                    <!-- <td th:text="*{id}"></td> -->
                     <td th:text="${n.count}"></td>
                     <td th:text="*{name}"></td>
                     <td th:text="*{description}"></td>
@@ -34,7 +30,7 @@
     </main>
     <script type="text/javascript" th:src="@{js/bootstrap.min.js}"></script>
     <script type="text/javascript" th:src="@{js/bootstrap.bundle.min.js}"></script>
-    <footer th:replace="~{/fragments/footer_page :: (${isLogin}) ? footerlogin : footernologin}"></footer>
+    <footer th:replace="~{/fragments/footer_page :: admin}"></footer>
 </body>
 
 </html>
