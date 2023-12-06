@@ -40,12 +40,19 @@ public class WebSecurityConfiguration {
         http.authorizeHttpRequests(authorize -> authorize
                 .requestMatchers("/login", "/", "/auth/").permitAll()
                 .requestMatchers("/css/**", "/js/**", "/img/**").permitAll()
-                .requestMatchers("/admin/**")
-                .hasAnyAuthority("ADMIN")
+                .requestMatchers("/admin/**").hasAuthority("ADMIN")
                 .requestMatchers("/user/**").hasAuthority("USER")
                 .requestMatchers("/bendahara/**").hasAnyAuthority("BENDAHARA","ADMIN")
                 .requestMatchers("/sekretaris/**").hasAnyAuthority("SEKRETARIS","ADMIN")
                 .requestMatchers("/ppmb/**").hasAnyAuthority("PPMB","ADMIN")
+                .requestMatchers("/divisi/").hasAnyAuthority("DIVISI PENDIDIKAN DAN PELATIHAN","DIVISI PELATIHAN BAHASA INGGRIS","DIVISI KEROHANIAN","DIVISI KESEJAHTERAAN","DIVISI KESEHATAN","DIVISI KEASRAMAAN","DIVISI KEBERSIHAN","ADMIN")
+                .requestMatchers("/divisi/pendidikan/**").hasAnyAuthority("DIVISI PENDIDIKAN DAN PELATIHAN","ADMIN")
+                .requestMatchers("/divisi/pelatihaninggris/**").hasAnyAuthority("DIVISI PELATIHAN BAHASA INGGRIS","ADMIN")
+                .requestMatchers("/divisi/kerohanian/**").hasAnyAuthority("DIVISI KEROHANIAN","ADMIN")
+                .requestMatchers("/divisi/kesejahteraan/**").hasAnyAuthority("DIVISI KESEJAHTERAAN","ADMIN")
+                .requestMatchers("/divisi/kesehatan/**").hasAnyAuthority("DIVISI KESEHATAN","ADMIN")
+                .requestMatchers("/divisi/keasramaan/**").hasAnyAuthority("DIVISI KEASRAMAAN","ADMIN")
+                .requestMatchers("/divisi/kebersihan/**").hasAnyAuthority("DIVISI KEBERSIHAN","ADMIN")
                 .anyRequest().authenticated())
                 .formLogin((form) -> form
                         .loginPage("/login").permitAll()
@@ -54,17 +61,31 @@ public class WebSecurityConfiguration {
                             public void onAuthenticationSuccess(HttpServletRequest request,
                                     HttpServletResponse response, Authentication authentication)
                                     throws IOException, ServletException {
-                                System.out.println("Logged As: " + authentication.getName());
-                                if(authentication.getName().equalsIgnoreCase("USER"))
+                                System.out.println("Logged As: " + authentication.getAuthorities().toString().replace("[","").replace("]",""));
+                                if(authentication.getAuthorities().toString().replace("[","").replace("]","").equalsIgnoreCase("USER"))
                                     response.sendRedirect("/user/");
-                                else if(authentication.getName().equalsIgnoreCase("ADMIN"))
+                                else if(authentication.getAuthorities().toString().replace("[","").replace("]","").equalsIgnoreCase("ADMIN"))
                                     response.sendRedirect("/admin/");
-                                else if(authentication.getName().equalsIgnoreCase("BENDAHARA"))
+                                else if(authentication.getAuthorities().toString().replace("[","").replace("]","").equalsIgnoreCase("BENDAHARA"))
                                     response.sendRedirect("/bendahara/");
-                                else if (authentication.getName().equalsIgnoreCase("SEKRETARIS"))
+                                else if (authentication.getAuthorities().toString().replace("[","").replace("]","").equalsIgnoreCase("SEKRETARIS"))
                                     response.sendRedirect("/sekretaris/");
-                                else if (authentication.getName().equalsIgnoreCase("PPMB"))
+                                else if (authentication.getAuthorities().toString().replace("[","").replace("]","").equalsIgnoreCase("PPMB"))
                                     response.sendRedirect("/ppmb/");
+                                else if (authentication.getAuthorities().toString().replace("[","").replace("]","").equalsIgnoreCase("DIVISI PENDIDIKAN DAN PELATIHAN"))
+                                    response.sendRedirect("/divisi/pendidikan/");
+                                else if (authentication.getAuthorities().toString().replace("[","").replace("]","").equalsIgnoreCase("DIVISI PELATIHAN BAHASA INGGRIS"))
+                                    response.sendRedirect("/divisi/pelatihaninggris/");
+                                else if (authentication.getAuthorities().toString().replace("[","").replace("]","").equalsIgnoreCase("DIVISI KEROHANIAN"))
+                                    response.sendRedirect("/divisi/kerohanian/");
+                                else if (authentication.getAuthorities().toString().replace("[","").replace("]","").equalsIgnoreCase("DIVISI KESEJAHTERAAN"))
+                                    response.sendRedirect("/divisi/kesejahteran/");
+                                else if (authentication.getAuthorities().toString().replace("[","").replace("]","").equalsIgnoreCase("DIVISI KEASRAMAAN"))
+                                    response.sendRedirect("/divisi/keasramaan/");
+                                else if (authentication.getAuthorities().toString().replace("[","").replace("]","").equalsIgnoreCase("DIVISI KEBERSIHAN"))
+                                    response.sendRedirect("/divisi/kebersihan/");
+                                else if (authentication.getAuthorities().toString().replace("[","").replace("]","").equalsIgnoreCase("DIVISI KESEHATAN"))
+                                    response.sendRedirect("/divisi/kesehatan/");
                                 else response.sendRedirect("/");
                             }
                         }))

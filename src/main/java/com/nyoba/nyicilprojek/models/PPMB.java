@@ -14,6 +14,7 @@ public class PPMB {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
     private String tpa_area;
     @ManyToOne
     @JoinColumn(name="id_memberppmb",referencedColumnName = "id")

@@ -32,75 +32,76 @@ public class DivPendidikanController {
 
     @GetMapping("/")
     public String home(Model model) {
-        model.addAttribute("isLogin",true);
+        model.addAttribute("memberDiv", memberDivPendidikanRepository.findAll());
+        model.addAttribute("member", memberRepository.findAll());
+        model.addAttribute("group", kelompokRepository.findAll());
+        model.addAttribute("membergroup", memberGroupRepository.findAll());
+        model.addAttribute("addgroup", new Kelompok());
+        model.addAttribute("addmemberg", new MemberGroup());
+        model.addAttribute("addMember", new MemberDivPendidikan());
         return "divpendidikan/index";
     }
-    @GetMapping("/list/")
-    public String memberString(Model model){
-        model.addAttribute("member", memberDivPendidikanRepository.findAll());
-        return "divpendidikan/list-member";
-    }
-    @GetMapping("/list-membergroup/")
-    public String memberGroupString(Model model){
-        model.addAttribute("membergroup", memberGroupRepository.findAll());
-        return "divpendidikan/list-membergroup";
-    }
-    @GetMapping("/list-group/")
-    public String groupString(Model model){
-        model.addAttribute("group", kelompokRepository.findAll());
-        return "divpendidikan/list-group";
-    }
-    @GetMapping("/add-member/")
-    public String addMember(Model model){
-        MemberDivPendidikan memberDivPendidikan=new MemberDivPendidikan();
-        model.addAttribute("member", memberRepository.findAll());
-        model.addAttribute("add", memberDivPendidikan);
-        return "divpendidikan/add-member";
-    }
-    @GetMapping("/add-group/")
-    public String addGroup(Model mode){
-        Kelompok kelompok=new Kelompok();
-        mode.addAttribute("add", kelompok);
-        return "divpendidikan/add-group";
-    }
-    @GetMapping("/add-groupmember/")
-    public String addDivMember(Model model){
-        MemberGroup memberGroup=new MemberGroup();
-        model.addAttribute("member", memberRepository.findAll());
-        model.addAttribute("kelompok", kelompokRepository.findAll());
-        model.addAttribute("add", memberGroup);
-        return "divpendidikan/add-groupmember";
-    }
+    // @GetMapping("/list-membergroup/")
+    // public String memberGroupString(Model model){
+    //     model.addAttribute("membergroup", memberGroupRepository.findAll());
+    //     return "divpendidikan/list-membergroup";
+    // }
+    // @GetMapping("/list-group/")
+    // public String groupString(Model model){
+    //     model.addAttribute("group", kelompokRepository.findAll());
+    //     return "divpendidikan/list-group";
+    // }
+    // @GetMapping("/add-member/")
+    // public String addMember(Model model){
+    //     MemberDivPendidikan memberDivPendidikan=new MemberDivPendidikan();
+    //     model.addAttribute("member", memberRepository.findAll());
+    //     model.addAttribute("add", memberDivPendidikan);
+    //     return "divpendidikan/add-member";
+    // }
+    // @GetMapping("/add-group/")
+    // public String addGroup(Model mode){
+    //     Kelompok kelompok=new Kelompok();
+    //     mode.addAttribute("add", kelompok);
+    //     return "divpendidikan/add-group";
+    // }
+    // @GetMapping("/add-groupmember/")
+    // public String addDivMember(Model model){
+    //     MemberGroup memberGroup=new MemberGroup();
+    //     model.addAttribute("add", memberGroup);
+    //     model.addAttribute("member", memberRepository.findAll());
+    //     model.addAttribute("kelompok", kelompokRepository.findAll());
+    //     return "divpendidikan/add-groupmember";
+    // }
     @PostMapping("/savem")
     public String saveM(@ModelAttribute("add")MemberDivPendidikan memberDivPendidikan){
         System.out.println(memberDivPendidikan);
         memberDivPendidikanRepository.save(memberDivPendidikan);
-        return "redirect:/divisi/pendidikan/add-member/";
+        return "redirect:/divisi/pendidikan/";
     }
     @PostMapping("/saveg")
     public String saveG(Kelompok kelompok){
         kelompokRepository.save(kelompok);
-        return "redirect:/divisi/pendidikan/add-group/";
+        return "redirect:/divisi/pendidikan/";
     }
     @PostMapping("/savemg")
     public String saveM(MemberGroup memberGroup){
         memberGroupRepository.save(memberGroup);
-        return "redirect:/divisi/pendidikan/add-groupmember/";
+        return "redirect:/divisi/pendidikan/";
     }
     @GetMapping("/delete-g/{id}")
     public String deleteGroup(@PathVariable(value = "id")Long id,Model model){
         kelompokRepository.deleteById(id);
-        return "redirect:/divisi/pendidikan/list-group/";
+        return "redirect:/divisi/pendidikan/";
     }
     @GetMapping("/delete-m/{id}")
     public String deleteMember(@PathVariable(value = "id")Long id,Model model){
         memberDivPendidikanRepository.deleteById(id);
-        return "redirect:/divisi/pendidikan/list/";
+        return "redirect:/divisi/pendidikan/";
     }
     @GetMapping("/delete-mg/{id}")
     public String deleteMemberGroup(@PathVariable(value = "id")Long id,Model model){
         memberGroupRepository.deleteById(id);
-        return "redirect:/divisi/pendidikan/list-membergroup/";
+        return "redirect:/divisi/pendidikan/";
     }
     @GetMapping("/update-g/{id}")
     public String updateGroup(@PathVariable(value = "id")Long id,Model model){

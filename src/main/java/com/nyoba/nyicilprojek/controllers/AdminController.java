@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.nyoba.nyicilprojek.config.AuthConfig;
 import com.nyoba.nyicilprojek.models.Generation;
@@ -21,6 +24,7 @@ public class AdminController extends AuthConfig {
 
      @Autowired
      private AdminService adminService;
+     private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
      @GetMapping("/")
      public String home(Model model) {
@@ -41,12 +45,22 @@ public class AdminController extends AuthConfig {
      }
      @GetMapping("/update/{id}")
      public String updateAuth(@PathVariable("id")Long id,Model model){
-          model.addAttribute("update",authRepository.getReferenceById(id));
+          Auth auth=authRepository.getReferenceById(id);
+          auth.setPassword("");
+          model.addAttribute("update",auth);
           return "admin/update-auth";
      }
      @PostMapping("/save-update")
-     public String saveUpdateAuth(Auth auth){
-          authRepository.save(auth);
+     public String saveUpdateAuth(@ModelAttribute("add")Auth auth){
+          String oldPass=auth.getPassword();
+          String oldPassHashed=authRepository.getReferenceById(auth.getId()).getPassword();
+          if(passwordEncoder.matches(oldPass,oldPassHashed)){
+               // System.out.println(newpass);
+               auth.setPassword(passwordEncoder.encode(oldPass));
+               authRepository.save(auth);
+               return "redirect:/admin/";
+          }
+          System.out.println("Password Not Matches");
           return "redirect:/admin/";
      }
      @GetMapping("/delete/{id}")
