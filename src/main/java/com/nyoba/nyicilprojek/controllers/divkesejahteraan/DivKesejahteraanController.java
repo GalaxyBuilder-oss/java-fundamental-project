@@ -23,60 +23,62 @@ public class DivKesejahteraanController {
     private MemberRepository memberRepository;
     @Autowired
     private FoodRepository foodRepository;
-
+    
     @GetMapping("/")
-    public String home(){
+    public String home(Model model){
+        model.addAttribute("addMember", new MemberDivKesejahteraan());
+        model.addAttribute("member", memberRepository.findAll());
+        model.addAttribute("addMenu", new Food());
+        model.addAttribute("menu", foodRepository.findAll());
+        model.addAttribute("memberDiv", memberDivKesejahteraanRepository.findAll());
         return "divkesejahteraan/index";
     }
-    @GetMapping("/list/")
-    public String list(Model model){
-        model.addAttribute("member", memberDivKesejahteraanRepository.findAll());
-        return "divkesejahteraan/list";
-    }
-    @GetMapping("/add/")
-    public String addMember(Model model){
-        MemberDivKesejahteraan member=new MemberDivKesejahteraan();
-        model.addAttribute("add", member);
-        model.addAttribute("member", memberRepository.findAll());
-        return "divkesejahteraan/add";
-    }
+    // @GetMapping("/list/")
+    // public String list(Model model){
+    //     return "divkesejahteraan/list";
+    // }
+    // @GetMapping("/add/")
+    // public String addMember(Model model){
+    //     MemberDivKesejahteraan member=new MemberDivKesejahteraan();
+    //     return "divkesejahteraan/add";
+    // }
     @PostMapping("/save")
     public String saveMember(MemberDivKesejahteraan member){
         memberDivKesejahteraanRepository.save(member);
-        return "redirect:/divisi/kesejahteraan/add/";
+        return "redirect:/divisi/kesejahteraan/";
     }
     @GetMapping("/delete/{id}")
     public String deleteString(@PathVariable(value = "id")Long id,Model model){
         memberDivKesejahteraanRepository.deleteById(id);
-        return "redirect:/divisi/kesejahteraan/list/";
+        return "redirect:/divisi/kesejahteraan/";
     }
     @GetMapping("/update/{id}")
     public String updateString(@PathVariable(value = "id")Long id,Model model){
+        model.addAttribute("member", memberRepository.findAll());
         model.addAttribute("update", memberDivKesejahteraanRepository.getReferenceById(id));
         return "divkesejahteraan/update";
     }
 
     // Launch And Breakfast
-    @GetMapping("/list-menu/")
-    public String foodMenu(Model model){
-        model.addAttribute("menu", foodRepository.findAll());
-        return "divkesejahteraan/list-menu";
-    }
-    @GetMapping("/add-menu/")
-    public String addFood(Model model){
-        Food foodMenu=new Food();
-        model.addAttribute("add", foodMenu);
-        return "divkesejahteraan/add-menu";
-    }
+    // @GetMapping("/list-menu/")
+    // public String foodMenu(Model model){
+    //     model.addAttribute("menu", foodRepository.findAll());
+    //     return "divkesejahteraan/list-menu";
+    // }
+    // @GetMapping("/add-menu/")
+    // public String addFood(Model model){
+    //     Food foodMenu=new Food();
+    //     return "divkesejahteraan/add-menu";
+    // }
     @PostMapping("/save-menu")
     public String saveFood(Food food){
         foodRepository.save(food);
-        return "redirect:/divisi/kesejahteraan/add-menu/";
+        return "redirect:/divisi/kesejahteraan/";
     }
     @GetMapping("/delete-menu/{id}")
     public String deleteFood(@PathVariable(value = "id")Long id,Model model){
         foodRepository.deleteById(id);
-        return "redirect:/divisi/kesejahteraan/list-menu/";
+        return "redirect:/divisi/kesejahteraan/";
     }
     @GetMapping("/update-menu/{id}")
     public String updateFood(@PathVariable(value = "id")Long id,Model model){

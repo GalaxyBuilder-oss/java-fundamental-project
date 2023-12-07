@@ -41,40 +41,8 @@ public class DivPendidikanController {
         model.addAttribute("addMember", new MemberDivPendidikan());
         return "divpendidikan/index";
     }
-    // @GetMapping("/list-membergroup/")
-    // public String memberGroupString(Model model){
-    //     model.addAttribute("membergroup", memberGroupRepository.findAll());
-    //     return "divpendidikan/list-membergroup";
-    // }
-    // @GetMapping("/list-group/")
-    // public String groupString(Model model){
-    //     model.addAttribute("group", kelompokRepository.findAll());
-    //     return "divpendidikan/list-group";
-    // }
-    // @GetMapping("/add-member/")
-    // public String addMember(Model model){
-    //     MemberDivPendidikan memberDivPendidikan=new MemberDivPendidikan();
-    //     model.addAttribute("member", memberRepository.findAll());
-    //     model.addAttribute("add", memberDivPendidikan);
-    //     return "divpendidikan/add-member";
-    // }
-    // @GetMapping("/add-group/")
-    // public String addGroup(Model mode){
-    //     Kelompok kelompok=new Kelompok();
-    //     mode.addAttribute("add", kelompok);
-    //     return "divpendidikan/add-group";
-    // }
-    // @GetMapping("/add-groupmember/")
-    // public String addDivMember(Model model){
-    //     MemberGroup memberGroup=new MemberGroup();
-    //     model.addAttribute("add", memberGroup);
-    //     model.addAttribute("member", memberRepository.findAll());
-    //     model.addAttribute("kelompok", kelompokRepository.findAll());
-    //     return "divpendidikan/add-groupmember";
-    // }
     @PostMapping("/savem")
-    public String saveM(@ModelAttribute("add")MemberDivPendidikan memberDivPendidikan){
-        System.out.println(memberDivPendidikan);
+    public String saveM(MemberDivPendidikan memberDivPendidikan){
         memberDivPendidikanRepository.save(memberDivPendidikan);
         return "redirect:/divisi/pendidikan/";
     }
@@ -105,16 +73,20 @@ public class DivPendidikanController {
     }
     @GetMapping("/update-g/{id}")
     public String updateGroup(@PathVariable(value = "id")Long id,Model model){
+        model.addAttribute("member", memberRepository.findAll());
         model.addAttribute("update", kelompokRepository.getReferenceById(id));
         return "divpendidikan/update-group";
     }
     @GetMapping("/update-m/{id}")
     public String updateMember(@PathVariable(value = "id")Long id,Model model){
+        model.addAttribute("member", memberRepository.findAll());
         model.addAttribute("update", memberDivPendidikanRepository.getReferenceById(id));
         return "divpendidikan/update-member";
     }
     @GetMapping("/update-mg/{id}")
     public String updateMemberGroup(@PathVariable(value = "id")Long id,Model model){
+        model.addAttribute("member", memberRepository.findAll());
+        model.addAttribute("group", kelompokRepository.findAll());
         model.addAttribute("update", memberGroupRepository.getReferenceById(id));
         return "divpendidikan/update-membergroup";
     }

@@ -16,6 +16,7 @@ public class Member {
     private Long id;
     private String nim;
     private String name;
+    private String gender;
     private String address;
     private String description;
     private int ryear;

@@ -25,62 +25,68 @@ public class DivKeasramaanController {
     private MemberDormitoryRepository memberDormitoryRepository;
 
     @GetMapping("/")
-    public String home(){
+    public String home(Model model){
+        model.addAttribute("add", new MemberDivKeasramaan());
+        model.addAttribute("memberDiv", memberDivKeasramaanRepository.findAll());
+        model.addAttribute("member", memberRepository.findAll());
+        model.addAttribute("dweller", memberDormitoryRepository.findAll());
+        model.addAttribute("addDweller", new MemberDormitory());
         return "divkeasramaan/index";
     }
-    @GetMapping("/list/")
-    public String list(Model model){
-        model.addAttribute("member", memberDivKeasramaanRepository.findAll());
-        return "divkeasramaan/list";
-    }
-    @GetMapping("/add/")
-    public String addMember(Model model){
-        MemberDivKeasramaan member=new MemberDivKeasramaan();
-        model.addAttribute("add", member);
-        model.addAttribute("member", memberRepository.findAll());
-        return "divkeasramaan/add";
-    }
+    // @GetMapping("/list/")
+    // public String list(Model model){
+    //     model.addAttribute("memberDiv", memberDivKeasramaanRepository.findAll());
+    //     return "divkeasramaan/list";
+    // }
+    // @GetMapping("/add/")
+    // public String addMember(Model model){
+    //     MemberDivKeasramaan member=;
+    //     model.addAttribute("add", new MemberDivKeasramaan());
+    //     model.addAttribute("member", memberRepository.findAll());
+    //     return "divkeasramaan/add";
+    // }
     @PostMapping("/save")
     public String saveMember(MemberDivKeasramaan member){
         memberDivKeasramaanRepository.save(member);
-        return "redirect:/divisi/keasramaan/add/";
+        return "redirect:/divisi/keasramaan/";
     }
     @GetMapping("/delete/{id}")
     public String deleteString(@PathVariable(value = "id")Long id,Model model){
         memberDivKeasramaanRepository.deleteById(id);
-        return "redirect:/divisi/keasramaan/list/";
+        return "redirect:/divisi/keasramaan/";
     }
     @GetMapping("/update/{id}")
     public String updateString(@PathVariable(value = "id")Long id,Model model){
+        model.addAttribute("member", memberRepository.findAll());
         model.addAttribute("update", memberDivKeasramaanRepository.getReferenceById(id));
         return "divkeasramaan/update";
     }
 
     // anggota asrama
-    @GetMapping("/list-penghuni/")
-    public String listPenghuni(Model model){
-        model.addAttribute("member", memberDormitoryRepository.findAll());
-        return "divkeasramaan/list-penghuni";
-    }
-    @GetMapping("/add-penghuni/")
-    public String addPenghuni(Model model){
-        MemberDormitory member=new MemberDormitory();
-        model.addAttribute("add", member);
-        model.addAttribute("member", memberRepository.findAll());
-        return "divkeasramaan/add-penghuni";
-    }
+    // @GetMapping("/list-penghuni/")
+    // public String listPenghuni(Model model){
+       
+    //     return "divkeasramaan/list-penghuni";
+    // }
+    // @GetMapping("/add-penghuni/")
+    // public String addPenghuni(Model model){
+    //     MemberDormitory member=;
+    //     model.addAttribute("member", memberRepository.findAll());
+    //     return "divkeasramaan/add-penghuni";
+    // }
     @PostMapping("/save-penghuni")
     public String savePenghuni(MemberDormitory member){
         memberDormitoryRepository.save(member);
-        return "redirect:/divisi/keasramaan/add-penghuni/";
+        return "redirect:/divisi/keasramaan/";
     }
     @GetMapping("/delete-penghuni/{id}")
     public String deletePenghuni(@PathVariable(value = "id")Long id,Model model){
         memberDormitoryRepository.deleteById(id);
-        return "redirect:/divisi/keasramaan/list-penghuni/";
+        return "redirect:/divisi/keasramaan/";
     }
     @GetMapping("/update-penghuni/{id}")
     public String updatePenghuni(@PathVariable(value = "id")Long id,Model model){
+        model.addAttribute("member", memberRepository.findAll());
         model.addAttribute("update", memberDormitoryRepository.getReferenceById(id));
         return "divkeasramaan/update-penghuni";
     }

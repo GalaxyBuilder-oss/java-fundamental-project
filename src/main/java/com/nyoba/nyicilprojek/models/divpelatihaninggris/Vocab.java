@@ -17,7 +17,7 @@ public class Vocab {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
-    @JoinColumn(name = "id_memberpeltihaninggris",referencedColumnName = "id")
-    private Member idMember;
+    @JoinColumn(name = "id_memberpelatihaninggris",referencedColumnName = "id")
+    private Member id_member;
     private String vocab;
 }

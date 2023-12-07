@@ -28,63 +28,70 @@ public class DivKebersihanController {
     private MemberRepository memberRepository;
 
     @GetMapping("/")
-    public String home(){
+    public String home(Model model){
+        model.addAttribute("addMember", new MemberDivKebersihan());
+        model.addAttribute("memberDiv", memberDivKebersihanRepository.findAll());
+        model.addAttribute("member", memberRepository.findAll());
+        model.addAttribute("piket", piketRepository.findAll());
+        model.addAttribute("addPiket", new Piket());
+        model.addAttribute("room", roomRepository.findAll());
         return "divkebersihan/index";
     }
-    @GetMapping("/list/")
-    public String list(Model model){
-        model.addAttribute("member", memberDivKebersihanRepository.findAll());
-        return "divkebersihan/list";
-    }
-    @GetMapping("/add/")
-    public String addMember(Model model){
-        MemberDivKebersihan member=new MemberDivKebersihan();
-        model.addAttribute("add", member);
-        model.addAttribute("member", memberRepository.findAll());
-        return "divkebersihan/add";
-    }
+    // @GetMapping("/list/")
+    // public String list(Model model){
+    //     return "divkebersihan/list";
+    // }
+    // @GetMapping("/add/")
+    // public String addMember(Model model){
+    //     MemberDivKebersihan member=;
+    //     model.addAttribute("addMember", new MemberDivKebersihan());
+    //     model.addAttribute("member", memberRepository.findAll());
+    //     return "divkebersihan/add";
+    // }
     @PostMapping("/save")
     public String saveMember(MemberDivKebersihan member){
         memberDivKebersihanRepository.save(member);
-        return "redirect:/divisi/kebersihan/add/";
+        return "redirect:/divisi/kebersihan/";
     }
     @GetMapping("/delete/{id}")
     public String deleteString(@PathVariable(value = "id")Long id,Model model){
         memberDivKebersihanRepository.deleteById(id);
-        return "redirect:/divisi/kebersihan/list/";
+        return "redirect:/divisi/kebersihan/";
     }
     @GetMapping("/update/{id}")
     public String updateString(@PathVariable(value = "id")Long id,Model model){
+        model.addAttribute("member", memberRepository.findAll());
         model.addAttribute("update", memberDivKebersihanRepository.getReferenceById(id));
         return "divkebersihan/update";
     }
 
     // Jadwal Piket
-    @GetMapping("/list-piket/")
-    public String listPiket(Model model){
-        model.addAttribute("piket", piketRepository.findAll());
-        return "divkebersihan/list-piket";
-    }
+    // @GetMapping("/list-piket/")
+    // public String listPiket(Model model){
+    //     model.addAttribute("piket", piketRepository.findAll());
+    //     return "divkebersihan/list-piket";
+    // }
     @GetMapping("/add-piket/")
-    public String addPiket(Model model){
-        Piket piket=new Piket();
-        model.addAttribute("add", piket);
-        model.addAttribute("member", memberRepository.findAll());
-        model.addAttribute("room", roomRepository.findAll());
-        return "divkebersihan/add-piket";
-    }
+    // public String addPiket(Model model){
+    //     Piket piket=;
+    //     model.addAttribute("member", memberRepository.findAll());
+    //     model.addAttribute("addPiket", new Piket());
+    //     model.addAttribute("room", roomRepository.findAll());
+    //     return "divkebersihan/add-piket";
+    // }
     @PostMapping("/save-piket")
     public String savePiket(Piket piket){
         piketRepository.save(piket);
-        return "redirect:/divisi/kebersihan/add-piket/";
+        return "redirect:/divisi/kebersihan/";
     }
     @GetMapping("/delete-piket/{id}")
     public String deletePiket(@PathVariable(value = "id")Long id,Model model){
         piketRepository.deleteById(id);
-        return "redirect:/divisi/kebersihan/list-piket/";
+        return "redirect:/divisi/kebersihan/";
     }
     @GetMapping("/update-piket/{id}")
     public String updatePiket(@PathVariable(value = "id")Long id,Model model){
+        model.addAttribute("member", memberRepository.findAll());
         model.addAttribute("update", memberDivKebersihanRepository.getReferenceById(id));
         return "divkebersihan/update-piket";
     }

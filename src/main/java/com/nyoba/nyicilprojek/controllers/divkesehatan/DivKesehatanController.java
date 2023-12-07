@@ -25,58 +25,61 @@ public class DivKesehatanController {
     private MemberRepository memberRepository;
 
     @GetMapping("/")
-    public String home(){
+    public String home(Model model){
+        model.addAttribute("addMember", new MemberDivKesehatan());
+        model.addAttribute("member", memberRepository.findAll());
+        model.addAttribute("memberDiv", memberDivKesehatanRepository.findAll());
+        model.addAttribute("addMedicine", new Farmacy());
+        model.addAttribute("medicine", farmacyRepository.findAll());
         return "divkesehatan/index";
     }
-    @GetMapping("/list/")
-    public String list(Model model){
-        model.addAttribute("member", memberDivKesehatanRepository.findAll());
-        return "divkesehatan/list";
-    }
-    @GetMapping("/add/")
-    public String addMember(Model model){
-        MemberDivKesehatan member=new MemberDivKesehatan();
-        model.addAttribute("add", member);
-        model.addAttribute("member", memberRepository.findAll());
-        return "divkesehatan/add";
-    }
+    // @GetMapping("/list/")
+    // public String list(Model model){
+    //     return "divkesehatan/list";
+    // }
+    // @GetMapping("/add/")
+    // public String addMember(Model model){
+    //     MemberDivKesehatan member=new MemberDivKesehatan();
+    //     return "divkesehatan/add";
+    // }
     @PostMapping("/save")
     public String saveMember(MemberDivKesehatan member){
         memberDivKesehatanRepository.save(member);
-        return "redirect:/divisi/kesehatan/add/";
+        return "redirect:/divisi/kesehatan/";
     }
     @GetMapping("/delete/{id}")
     public String deleteString(@PathVariable(value = "id")Long id,Model model){
         memberDivKesehatanRepository.deleteById(id);
-        return "redirect:/divisi/kesehatan/list/";
+        return "redirect:/divisi/kesehatan/";
     }
     @GetMapping("/update/{id}")
     public String updateString(@PathVariable(value = "id")Long id,Model model){
+        model.addAttribute("member",memberRepository.findAll());
         model.addAttribute("update", memberDivKesehatanRepository.getReferenceById(id));
         return "divkesehatan/update";
     }
 
     // Stok Obat Session
-    @GetMapping("/stok-obat/")
-    public String listMedicine(Model model){
-        model.addAttribute("medicine", farmacyRepository.findAll());
-        return "divkesehatan/list-medicine";
-    }
-    @GetMapping("/add-obat/")
-    public String addMedicine(Model model){
-        Farmacy medicine=new Farmacy();
-        model.addAttribute("add", medicine);
-        return "divkesehatan/add-stock";
-    }
+    // @GetMapping("/stok-obat/")
+    // public String listMedicine(Model model){
+    //     model.addAttribute("medicine", farmacyRepository.findAll());
+    //     return "divkesehatan/list-medicine";
+    // }
+    // @GetMapping("/add-obat/")
+    // public String addMedicine(Model model){
+    //     Farmacy medicine=new Farmacy();
+    //     model.addAttribute("add", medicine);
+    //     return "divkesehatan/add-stock";
+    // }
     @PostMapping("/save-stock")
     public String saveObat(Farmacy medicine){
         farmacyRepository.save(medicine);
-        return "redirect:/divisi/kesehatan/add-obat/";
+        return "redirect:/divisi/kesehatan/";
     }
     @GetMapping("/delete-obat/{id}")
     public String deleteMedicine(@PathVariable(value = "id")Long id,Model model){
         farmacyRepository.deleteById(id);
-        return "redirect:/divisi/kesehatan/stok-obat/";
+        return "redirect:/divisi/kesehatan/";
     }
     @GetMapping("/update-obat/{id}")
     public String updateMedicine(@PathVariable(value = "id")Long id,Model model){

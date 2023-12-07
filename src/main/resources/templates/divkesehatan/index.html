@@ -9,8 +9,145 @@
     <!-- <div th:replace="~{ fragments/common :: (${user.isAdmin}? #{header.admin} : #{header.normaluser}) }"></div> -->
     <header th:insert="~{fragments/header_page :: (${isLogin}) ? headerlogin : headernologin}"></header>
     <main class="container-fluid">
-        <div class="banner mx-auto">
-            anggap ini banner
+        <div class="container-xxl">
+            <div class="row my-4 shadow-sm">
+                <div class="col-xl-10 col-sm">
+                    <div class="tab-content" id="v-pills-tabContent">
+                        <div class="tab-pane fade show active" id="v-pills-dashboard" role="tabpanel"
+                            aria-labelledby="v-pills-dashboard-tab" tabindex="0">
+                            Divisi Kesehatan
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-member" role="tabpanel"
+                            aria-labelledby="v-pills-member-tab" tabindex="0">
+                            <nav>
+                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                    <button class="nav-link active" id="nav-member-tab" data-bs-toggle="tab"
+                                        data-bs-target="#nav-member" type="button" role="tab" aria-controls="nav-member"
+                                        aria-selected="true">Daftar Anggota</button>
+                                    <button class="nav-link" id="nav-add-member-tab" data-bs-toggle="tab"
+                                        data-bs-target="#nav-add-member" type="button" role="tab"
+                                        aria-controls="nav-add-member" aria-selected="false">Tambah Anggota</button>
+                                </div>
+                            </nav>
+                            <div class="tab-content" id="nav-tabContent">
+                                <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
+                                    aria-labelledby="nav-home-tab" tabindex="0">
+                                    <table class="table">
+                                        <tr>
+                                            <th>NO</th>
+                                            <th>NAMA</th>
+                                            <th>JABATAN</th>
+                                        </tr>
+                                        <div th:each="m,n : ${memberDiv}">
+                                            <tr th:each="a : ${m.idMember}">
+                                                <td th:text="${n.count}"></td>
+                                                <td th:text="${a.name}"></td>
+                                                <td th:text="${m.role}"></td>
+                                                <td><a th:href="@{/divisi/kesehatan/delete/{id}(id=${m.id})}">Hapus</a>
+                                                </td>
+                                                <td><a th:href="@{/divisi/kesehatan/update/{id}(id=${m.id})}">Update</a>
+                                                </td>
+                                            </tr>
+                                        </div>
+                                    </table>
+                                </div>
+                                <div class="tab-pane fade" id="nav-add-member" role="tabpanel"
+                                    aria-labelledby="nav-add-member-tab" tabindex="0">
+                                    <form th:action="@{/divisi/kesehatan/save}" method="post" th:object="${addMember}">
+                                        <div class="input-group mb-3">
+                                            <label for="" class="input-group-text">Nama Anggota</label>
+                                            <select th:field="*{idMember}" id="">
+                                                <option th:each="m : ${member}" th:value="${m.id}" th:text="${m.name}">
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <label for="" class="input-group-text">Jabatan</label>
+                                            <input type="text" th:field="*{role}" id="">
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <input type="submit" value="Simpan">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-medicine" role="tabpanel"
+                            aria-labelledby="v-pills-medicine-tab" tabindex="0">
+                            <nav>
+                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                    <button class="nav-link active" id="nav-medicine-tab" data-bs-toggle="tab"
+                                        data-bs-target="#nav-medicine" type="button" role="tab"
+                                        aria-controls="nav-medicine" aria-selected="true">Stok Obat</button>
+                                    <button class="nav-link" id="nav-add-medicine-tab" data-bs-toggle="tab"
+                                        data-bs-target="#nav-add-medicine" type="button" role="tab"
+                                        aria-controls="nav-add-medicine" aria-selected="false">Tambah Stok</button>
+                                </div>
+                            </nav>
+                            <div class="tab-content" id="nav-tabContent">
+                                <div class="tab-pane fade show active" id="nav-medicine" role="tabpanel"
+                                    aria-labelledby="nav-medicine-tab" tabindex="0">
+                                    <table class="table">
+                                        <tr>
+                                            <th>NO</th>
+                                            <th>TANGGAL</th>
+                                            <th>STOK OBAT</th>
+                                            <th>NAMA OBAT</th>
+                                        </tr>
+                                        <tr th:each="m,n : ${medicine}">
+                                            <td th:text="${n.count}"></td>
+                                            <td th:text="${m.date}"></td>
+                                            <td th:text="${m.stock}"></td>
+                                            <td th:text="${m.description}"></td>
+                                            <td><a
+                                                    th:href="@{/divisi/kesehatan/delete-medicine/{id}(id=${m.id})}">Hapus</a>
+                                            </td>
+                                            <td><a
+                                                    th:href="@{/divisi/kesehatan/update-medicine/{id}(id=${m.id})}">Update</a>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="tab-pane fade" id="nav-add-medicine" role="tabpanel"
+                                    aria-labelledby="nav-add-medicine-tab" tabindex="0">
+                                    <form th:action="@{/divisi/kesehatan/save-stock}" method="post" th:object="${addMedicine}">
+                                        <div class="input-group mb-3">
+                                            <label for="" class="input-group-text">Keterangan</label>
+                                            <input type="text" th:field="*{description}">
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <label for="" class="input-group-text">Tanggal</label>
+                                            <input type="date" th:field="*{date}">
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <label for="" class="input-group-text">Stok</label>
+                                            <input type="text" th:field="*{stock}" id="">
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <input type="submit" value="Simpan">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-2 col-sm">
+                    <div class="nav flex-column nav-underline me-3" id="v-pills-tab" role="tablist"
+                        aria-orientation="vertical">
+                        <button class="nav-link active" id="v-pills-dashboard-tab" data-bs-toggle="pill"
+                            data-bs-target="#v-pills-dashboard" type="button" role="tab"
+                            aria-controls="v-pills-dashboard" aria-selected="true">Dashboard</button>
+                        <button class="nav-link" id="member-tab" data-bs-toggle="pill" data-bs-target="#v-pills-member"
+                            type="button" role="tab" aria-controls="v-pills-member" aria-selected="false">Daftar
+                            Member</button>
+                        <button class="nav-link" id="v-pills-medicine-tab" data-bs-toggle="pill"
+                            data-bs-target="#v-pills-medicine" type="button" role="tab" aria-controls="v-pills-medicine"
+                            aria-selected="false">Stok Obat</button>
+                    </div>
+                </div>
+            </div>
         </div>
         <a th:href="@{/divisi/kesehatan/list/}">Daftar Anggota Divisi</a>
         .<a th:href="@{/divisi/kesehatan/stok-obat/}">Daftar Stok Obat</a>

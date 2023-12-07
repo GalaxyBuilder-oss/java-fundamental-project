@@ -111,17 +111,19 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Nama Grup</th>
-                                            <th>Banyak Anggota</th>
+                                            <th>Nama Instruktur</th>
                                         </tr>
-                                        <tr th:each="g,n : ${group}">
+                                        <div th:each="g,n : ${group}">
+                                        <tr th:each="gm : ${g.id_instruktur}">
                                             <td th:text="${n.count}"></td>
                                             <td th:text="${g.practiceGroup}"></td>
-                                            <td th:text="${g.total}"></td>
+                                            <td th:text="${gm.name}"></td>
                                             <td><a th:href="@{/divisi/pendidikan/delete-g/{id}(id=${g.id})}">Hapus</a>
                                             </td>
                                             <td><a th:href="@{/divisi/pendidikan/update-g/{id}(id=${g.id})}">update</a>
                                             </td>
                                         </tr>
+                                        </div>
                                     </table>
                                 </div>
                             </div>
@@ -162,8 +164,10 @@
                                         <input type="text" th:field="*{practiceGroup}" id="">
                                     </div>
                                     <div class="input-group mb-3">
-                                        <label for="" class="input-group-text">total</label>
-                                        <input type="text" th:field="*{total}" id="">
+                                        <label for="" class="input-group-text">Nama Instruktur</label>
+                                        <select th:field="*{id_instruktur}" id="">
+                                            <option th:each="m : ${member}" th:value="${m.id}" th:text="${m.name}"></option>
+                                        </select>
                                     </div>
                                     <input type="submit" value="Simpan">
                                 </form>
