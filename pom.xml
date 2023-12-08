@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.salim</groupId>
-	<artifactId>pubsystem</artifactId>
+	<artifactId>systempub</artifactId>
 	<version>0.0.1</version>
 	<name>Project PUB System</name>
-	<description>Aplikasi untuk manajemen system di PUB.</description>
+	<description>Aplikasi untuk manajemen system organisasi PUB.</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>

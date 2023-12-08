@@ -12,15 +12,15 @@
         </div>
         <form th:action="@{/divisi/kerohanian/save}" method="post" th:object="${add}">
             <div class="input-group mb-3">
-                <label for="" class="input-group-text">Nama Anggota</label>
+                <label for="" class="input-group-text">NAMA ANGGOTA</label>
                 <input type="hidden" th:field="*{id}">
                 <select th:field="*{idMember}" id="">
                     <option th:each="m : *{member}" th:value="${m.id}" th:text="${m.name}"></option>
                 </select>
             </div>
             <div class="input-group mb-3">
-                <label for="" class="input-group-text">Jabatan</label>
-                <input type="text" th:field="*{role}" id="">
+                <label for="" class="input-group-text">JABATAN</label>
+                <input type="text" th:field="*{role}" id="" pattern="[a-zA-Z\s]+" required>
             </div>
             <div class="input-group mb-3">
                 <input type="submit" value="Simpan">

@@ -2,43 +2,31 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head th:insert="~{fragments/common :: head}">
-    <title th:text="#{app.name}"></title>
 </head>
 
 <body>
-    <header th:replace="~{fragments/common :: header}"></header>
-    <main class="container-fluid">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>KODE</th>
-                    <th>NAMA BUKU</th>
-                    <th>GENRE</th>
-                    <th>DESKRIPSI</th>
-                    <th>TAHUN TERBIT</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="buku : ${all}" th:object="${buku}">
-                    <td th:text="*{id}"></td>
-                    <td th:text="*{code}"></td>
-                    <td th:text="*{name}"></td>
-                    <td th:text="*{genres}"></td>
-                    <td th:text="*{description}"></td>
-                    <td th:text="*{ryear}"></td>
-                    <td>
-                        <a th:href="@{/delete/{id}(id = *{id})}" class="btn btn-danger">Hapus</a> | <a
-                            th:href="@{/update/{id}(id = *{id})}" class="btn btn-info">Update</a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    <header th:replace="~{fragments/header_page:: common}"></header>
+    <main>
+        <section class="vh-30">
+            <div class="container py-5 h-30">
+                <div class="row d-flex align-items-center justify-content-center h-30">
+                    <div class="col-md-8 col-lg-7 col-xl-6 h-30">
+                        <img th:src="@{/img/image-login.jpg}"
+                            class="img-fluid" alt="Phone image">
+                    </div>
+                    <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1 shadow-sm p-4">
+                        <h3>System PUB&trade;</h3>
+                        <hr>
+                        <p>
+                            Sebuah Sistem Berbasis Web Menggunakan Framework Java Spring Boot. Tujuan Aplikasi Ini Dibuat untuk membantu memudahkan kepengurusan dalam menjalankan tugas nya, serta memudahkan akses bagi mahasiswa PUB untuk melihat data-datanya
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
-    <script type="text/javascript" th:src="@{js/bootstrap.min.js}"></script>
-    <script type="text/javascript" th:src="@{js/bootstrap.bundle.min.js}"></script>
-    <footer th:replace="~{fragments/common :: footer}"></footer>
+    <script th:replace="~{fragments/common :: script}"></script>
+    <footer th:replace="~{fragments/footer_page :: common}"></footer>
 </body>
 
 </html>

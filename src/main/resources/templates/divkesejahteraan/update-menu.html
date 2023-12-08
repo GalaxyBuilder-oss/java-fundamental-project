@@ -7,21 +7,18 @@
 <body>
     <header th:insert="~{fragments/header_page :: divisi"></header>
     <main class="container-fluid">
-        <div class="banner mx-auto">
-            anggap ini banner
-        </div>
         <form th:action="@{/divisi/kesejahteraan/save-menu}" method="post" th:object="${update}">
             <div class="input-group mb-3">
                 <input type="hidden" th:field="*{id}">
-                <label for="" class="input-group-text">Nama Menu</label>
+                <label for="" class="input-group-text">NAMA MENU</label>
                 <input type="text" th:field="*{menu}" id="">
             </div>
             <div class="input-group mb-3">
-                <label for="" class="input-group-text">Menu Tipe</label>
+                <label for="" class="input-group-text">TIPE MENU</label>
                 <input type="text" th:field="*{type}" id="">
             </div>
             <div class="input-group mb-3">
-                <label for="" class="input-group-text">Keterangan</label>
+                <label for="" class="input-group-text">KETERANGAN</label>
                 <input type="text" th:field="*{description}" id="">
             </div>
             <div class="input-group mb-3">

@@ -21,10 +21,10 @@
                                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                     <button class="nav-link active" id="nav-member-tab" data-bs-toggle="tab"
                                         data-bs-target="#nav-member" type="button" role="tab" aria-controls="nav-member"
-                                        aria-selected="true">Daftar Anggota</button>
+                                        aria-selected="true">DAFTAR ANGGOTA</button>
                                     <button class="nav-link" id="nav-add-member-tab" data-bs-toggle="tab"
                                         data-bs-target="#nav-add-member" type="button" role="tab"
-                                        aria-controls="nav-add-member" aria-selected="false">Tambah Anggota</button>
+                                        aria-controls="nav-add-member" aria-selected="false">TAMBAH ANGGOTA</button>
                                 </div>
                             </nav>
                             <div class="tab-content" id="nav-tabContent">
@@ -56,15 +56,15 @@
                                     <form th:action="@{/divisi/kesejahteraan/save}" method="post"
                                         th:object="${addMember}">
                                         <div class="input-group mb-3">
-                                            <label for="" class="input-group-text">Nama Anggota</label>
+                                            <label for="" class="input-group-text">NAMA ANGGOTA</label>
                                             <select th:field="*{idMember}" id="">
                                                 <option th:each="m : ${member}" th:value="${m.id}" th:text="${m.name}">
                                                 </option>
                                             </select>
                                         </div>
                                         <div class="input-group mb-3">
-                                            <label for="" class="input-group-text">Jabatan</label>
-                                            <input type="text" th:field="*{role}" id="">
+                                            <label for="" class="input-group-text">JABATAN</label>
+                                            <input type="text" th:field="*{role}" id="" required>
                                         </div>
                                         <div class="input-group mb-3">
                                             <input type="submit" value="Simpan">
@@ -79,10 +79,10 @@
                                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                     <button class="nav-link active" id="nav-menu-tab" data-bs-toggle="tab"
                                         data-bs-target="#nav-menu" type="button" role="tab" aria-controls="nav-menu"
-                                        aria-selected="true">Daftar Menu</button>
+                                        aria-selected="true">DAFTAR MENU</button>
                                     <button class="nav-link" id="nav-add-menu-tab" data-bs-toggle="tab"
                                         data-bs-target="#nav-add-menu" type="button" role="tab"
-                                        aria-controls="nav-add-menu" aria-selected="false">Tambah Menu</button>
+                                        aria-controls="nav-add-menu" aria-selected="false">TAMBAH MENU</button>
                                 </div>
                             </nav>
                             <div class="tab-content" id="nav-tabContent">
@@ -91,9 +91,9 @@
                                     <table class="table">
                                         <tr>
                                             <th>NO</th>
-                                            <th>MENU</th>
-                                            <th>TYPE</th>
                                             <th>NAMA MENU</th>
+                                            <th>TYPE</th>
+                                            <th>DESKRIPSI</th>
                                         </tr>
                                         <tr th:each="m,n : ${menu}">
                                             <td th:text="${n.count}"></td>
@@ -115,15 +115,15 @@
                                 <form th:action="@{/divisi/kesejahteraan/save-menu}" method="post"
                                     th:object="${addMenu}">
                                     <div class="input-group mb-3">
-                                        <label for="" class="input-group-text">Nama Menu</label>
-                                        <input type="text" th:field="*{menu}" id="">
+                                        <label for="" class="input-group-text">NAMA MENU</label>
+                                        <input type="text" th:field="*{menu}" id="" required>
                                     </div>
                                     <div class="input-group mb-3">
-                                        <label for="" class="input-group-text">Tipe Menu</label>
-                                        <input type="text" th:field="*{type}" id="">
+                                        <label for="" class="input-group-text">TIPE MENU</label>
+                                        <input type="text" th:field="*{type}" id="" required>
                                     </div>
                                     <div class="input-group mb-3">
-                                        <label for="" class="input-group-text">Keterangan</label>
+                                        <label for="" class="input-group-text">KETERANGAN</label>
                                         <input type="text" th:field="*{description}" id="">
                                     </div>
                                     <div class="input-group mb-3">
@@ -140,13 +140,13 @@
                     aria-orientation="vertical">
                     <button class="nav-link active" id="v-pills-dashboard-tab" data-bs-toggle="pill"
                         data-bs-target="#v-pills-dashboard" type="button" role="tab" aria-controls="v-pills-dashboard"
-                        aria-selected="true">Dashboard</button>
+                        aria-selected="true">DASHBOARD</button>
                     <button class="nav-link" id="member-tab" data-bs-toggle="pill" data-bs-target="#v-pills-member"
-                        type="button" role="tab" aria-controls="v-pills-member" aria-selected="false">Daftar
-                        Member</button>
+                        type="button" role="tab" aria-controls="v-pills-member" aria-selected="false">DAFTAR
+                        ANGGOTA</button>
                     <button class="nav-link" id="v-pills-menu-tab" data-bs-toggle="pill" data-bs-target="#v-pills-menu"
-                        type="button" role="tab" aria-controls="v-pills-menu" aria-selected="false">Menu Makan Dan
-                        Sarapan</button>
+                        type="button" role="tab" aria-controls="v-pills-menu" aria-selected="false">MENU MAKAN DAN
+                        SARAPAN</button>
                 </div>
             </div>
         </div>

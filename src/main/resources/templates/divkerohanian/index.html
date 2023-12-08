@@ -21,10 +21,10 @@
                                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                     <button class="nav-link active" id="nav-member-tab" data-bs-toggle="tab"
                                         data-bs-target="#nav-member" type="button" role="tab" aria-controls="nav-member"
-                                        aria-selected="true">Daftar Anggota</button>
+                                        aria-selected="true">DAFTAR ANGGOTA</button>
                                     <button class="nav-link" id="nav-add-member-tab" data-bs-toggle="tab"
                                         data-bs-target="#nav-add-member" type="button" role="tab"
-                                        aria-controls="nav-add-member" aria-selected="false">Tambah Anggota</button>
+                                        aria-controls="nav-add-member" aria-selected="false">TAMBAH ANGGOTA</button>
                                 </div>
                             </nav>
                             <div class="tab-content" id="nav-tabContent">
@@ -41,7 +41,7 @@
                                                 <td th:text="${n.count}"></td>
                                                 <td th:text="${a.name}"></td>
                                                 <td th:text="${m.role}"></td>
-                                                <td><a th:href="@{/divisi/kerohanian/delete/{id}(id=${m.id})}">Hapus</a>
+                                                <td><a th:href="@{/divisi/kerohanian/delete/{id}(id=${m.id})}">HAPUS</a>
                                                 </td>
                                                 <td><a
                                                         th:href="@{/divisi/kerohanian/update/{id}(id=${m.id})}">Update</a>
@@ -54,15 +54,15 @@
                                     aria-labelledby="nav-add-member-tab" tabindex="0">
                                     <form th:action="@{/divisi/kerohanian/save}" method="post" th:object="${addMember}">
                                         <div class="input-group mb-3">
-                                            <label for="" class="input-group-text">Nama Anggota</label>
+                                            <label for="" class="input-group-text">NAMA ANGGOTA</label>
                                             <select th:field="*{idMember}" id="">
                                                 <option th:each="m : ${member}" th:value="${m.id}" th:text="${m.name}">
                                                 </option>
                                             </select>
                                         </div>
                                         <div class="input-group mb-3">
-                                            <label for="" class="input-group-text">Jabatan</label>
-                                            <input type="text" th:field="*{role}" id="">
+                                            <label for="" class="input-group-text">JABATAN</label>
+                                            <input type="text" th:field="*{role}" id="" pattern="[a-zA-Z\s]+" required>
                                         </div>
                                         <div class="input-group mb-3">
                                             <input type="submit" value="Simpan">
@@ -77,10 +77,10 @@
                                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                     <button class="nav-link active" id="nav-religion-tab" data-bs-toggle="tab"
                                         data-bs-target="#nav-religion" type="button" role="tab"
-                                        aria-controls="nav-religion" aria-selected="true">Poin Dan Hafalan</button>
+                                        aria-controls="nav-religion" aria-selected="true">POIN DAN HAFALAN</button>
                                     <button class="nav-link" id="nav-add-data-tab" data-bs-toggle="tab"
                                         data-bs-target="#nav-add-data" type="button" role="tab"
-                                        aria-controls="nav-add-data" aria-selected="false">Tambah Data</button>
+                                        aria-controls="nav-add-data" aria-selected="false">TAMBAH DATA</button>
                                 </div>
                             </nav>
                             <div class="tab-content" id="nav-tabContent">
@@ -114,19 +114,19 @@
                                     <form th:action="@{/divisi/kerohanian/save-data}" method="post"
                                         th:object="${addReligion}">
                                         <div class="input-group mb-3">
-                                            <label for="" class="input-group-text">Nama Anggota</label>
+                                            <label for="" class="input-group-text">NAMA ANGGOTA</label>
                                             <select th:field="*{iduser}" id="">
                                                 <option th:each="m : ${member}" th:value="${m.id}" th:text="${m.name}">
                                                 </option>
                                             </select>
                                         </div>
                                         <div class="input-group mb-3">
-                                            <label for="" class="input-group-text">Hafalan</label>
-                                            <input type="text" th:field="*{hafalan}" id="">
+                                            <label for="" class="input-group-text">HAFALAN</label>
+                                            <input type="text" th:field="*{hafalan}" id="" required>
                                         </div>
                                         <div class="input-group mb-3">
-                                            <label for="" class="input-group-text">Sisa Poin</label>
-                                            <input type="number" th:field="*{pointleft}" id="">
+                                            <label for="" class="input-group-text">SISA POIN</label>
+                                            <input type="number" th:field="*{pointleft}" id="" required>
                                         </div>
                                         <div class="input-group mb-3">
                                             <input type="submit" value="Simpan">
@@ -143,19 +143,17 @@
                         aria-orientation="vertical">
                         <button class="nav-link active" id="v-pills-dashboard-tab" data-bs-toggle="pill"
                             data-bs-target="#v-pills-dashboard" type="button" role="tab"
-                            aria-controls="v-pills-dashboard" aria-selected="true">Dashboard</button>
+                            aria-controls="v-pills-dashboard" aria-selected="true">DASHBOARD</button>
                         <button class="nav-link" id="member-tab" data-bs-toggle="pill" data-bs-target="#v-pills-member"
-                            type="button" role="tab" aria-controls="v-pills-member" aria-selected="false">Daftar
-                            Member</button>
+                            type="button" role="tab" aria-controls="v-pills-member" aria-selected="false">DAFTAR
+                            MEMBER</button>
                         <button class="nav-link" id="v-pills-religion-tab" data-bs-toggle="pill"
                             data-bs-target="#v-pills-religion" type="button" role="tab" aria-controls="v-pills-religion"
-                            aria-selected="false">Poin Dan Hafalan</button>
+                            aria-selected="false">POIN DAN HAFALAN</button>
                     </div>
                 </div>
             </div>
         </div>
-        <a th:href="@{/divisi/kerohanian/list/}">Daftar Anggota Divisi</a>.<a
-            th:href="@{/divisi/kerohanian/list-data/}">Daftar Data Poin Dan Hafalan</a>
     </main>
     <div th:replace="~{fragments/common :: script}"></div>
     <footer th:replace="~{fragments/footer_page :: divisi}"></footer>
