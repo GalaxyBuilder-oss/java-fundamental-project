@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.salim.systempub.models.divkebersihan.MemberDivKebersihan;
-import com.salim.systempub.models.divkebersihan.Piket;
-import com.salim.systempub.repository.MemberRepository;
-import com.salim.systempub.repository.RoomRepository;
-import com.salim.systempub.repository.divitionrepository.divkebersihan.MemberDivKebersihanRepository;
-import com.salim.systempub.repository.divitionrepository.divkebersihan.PiketRepository;
+import com.salim.systempub.entities.divkebersihan.MemberDivKebersihan;
+import com.salim.systempub.entities.divkebersihan.Piket;
+import com.salim.systempub.repositories.MemberRepository;
+import com.salim.systempub.repositories.RoomRepository;
+import com.salim.systempub.repositories.divitionrepository.divkebersihan.MemberDivKebersihanRepository;
+import com.salim.systempub.repositories.divitionrepository.divkebersihan.PiketRepository;
 
 @Controller
 @RequestMapping("/divisi/kebersihan")
@@ -37,17 +37,16 @@ public class DivKebersihanController {
         model.addAttribute("room", roomRepository.findAll());
         return "divkebersihan/index";
     }
-    // @GetMapping("/list/")
-    // public String list(Model model){
-    //     return "divkebersihan/list";
-    // }
-    // @GetMapping("/add/")
-    // public String addMember(Model model){
-    //     MemberDivKebersihan member=;
-    //     model.addAttribute("addMember", new MemberDivKebersihan());
-    //     model.addAttribute("member", memberRepository.findAll());
-    //     return "divkebersihan/add";
-    // }
+    @GetMapping("/list/")
+    public String list(Model model){
+        return "divkebersihan/list";
+    }
+    @GetMapping("/add/")
+    public String addMember(Model model){
+        model.addAttribute("addMember", new MemberDivKebersihan());
+        model.addAttribute("member", memberRepository.findAll());
+        return "divkebersihan/add";
+    }
     @PostMapping("/save")
     public String saveMember(MemberDivKebersihan member){
         memberDivKebersihanRepository.save(member);
@@ -66,19 +65,18 @@ public class DivKebersihanController {
     }
 
     // Jadwal Piket
-    // @GetMapping("/list-piket/")
-    // public String listPiket(Model model){
-    //     model.addAttribute("piket", piketRepository.findAll());
-    //     return "divkebersihan/list-piket";
-    // }
+    @GetMapping("/list-piket/")
+    public String listPiket(Model model){
+        model.addAttribute("piket", piketRepository.findAll());
+        return "divkebersihan/list-piket";
+    }
     @GetMapping("/add-piket/")
-    // public String addPiket(Model model){
-    //     Piket piket=;
-    //     model.addAttribute("member", memberRepository.findAll());
-    //     model.addAttribute("addPiket", new Piket());
-    //     model.addAttribute("room", roomRepository.findAll());
-    //     return "divkebersihan/add-piket";
-    // }
+    public String addPiket(Model model){
+        model.addAttribute("member", memberRepository.findAll());
+        model.addAttribute("addPiket", new Piket());
+        model.addAttribute("room", roomRepository.findAll());
+        return "divkebersihan/add-piket";
+    }
     @PostMapping("/save-piket")
     public String savePiket(Piket piket){
         piketRepository.save(piket);

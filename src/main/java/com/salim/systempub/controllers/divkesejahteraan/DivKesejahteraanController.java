@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.salim.systempub.models.divkesejahteraan.Food;
-import com.salim.systempub.models.divkesejahteraan.MemberDivKesejahteraan;
-import com.salim.systempub.repository.MemberRepository;
-import com.salim.systempub.repository.divitionrepository.divkesejahteraan.FoodRepository;
-import com.salim.systempub.repository.divitionrepository.divkesejahteraan.MemberDivKesejahteraanRepository;
+import com.salim.systempub.entities.divkesejahteraan.Food;
+import com.salim.systempub.entities.divkesejahteraan.MemberDivKesejahteraan;
+import com.salim.systempub.repositories.MemberRepository;
+import com.salim.systempub.repositories.divitionrepository.divkesejahteraan.FoodRepository;
+import com.salim.systempub.repositories.divitionrepository.divkesejahteraan.MemberDivKesejahteraanRepository;
 
 @Controller
 @RequestMapping("/divisi/kesejahteraan")

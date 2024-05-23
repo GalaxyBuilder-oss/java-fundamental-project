@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.salim.systempub.models.divkesehatan.Farmacy;
-import com.salim.systempub.models.divkesehatan.MemberDivKesehatan;
-import com.salim.systempub.repository.MemberRepository;
-import com.salim.systempub.repository.divitionrepository.divkesehatan.FarmacyRepository;
-import com.salim.systempub.repository.divitionrepository.divkesehatan.MemberDivKesehatanRepository;
+import com.salim.systempub.entities.divkesehatan.Farmacy;
+import com.salim.systempub.entities.divkesehatan.MemberDivKesehatan;
+import com.salim.systempub.repositories.MemberRepository;
+import com.salim.systempub.repositories.divitionrepository.divkesehatan.FarmacyRepository;
+import com.salim.systempub.repositories.divitionrepository.divkesehatan.MemberDivKesehatanRepository;
 
 @Controller
 @RequestMapping("/divisi/kesehatan")
