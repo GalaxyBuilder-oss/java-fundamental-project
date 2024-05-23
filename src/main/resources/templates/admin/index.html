@@ -37,7 +37,7 @@
           </div>
         </div>
         <hr>
-        <div class="card text-center">
+        <div class="card text-center" th:if="${ifMessage}">
           <div class="card-header" th:text="${name}">Featured</div>
           <div class="card-body">
             <h5 class="card-title" th:text="${number}">Special title treatment</h5>

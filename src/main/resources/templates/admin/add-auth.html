@@ -32,7 +32,10 @@
             <div class="form-group row">
                 <label for="" class="col-sm-2 col-form-label">ROLE</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control form-control-sm" pattern="[A-Z\s]+" th:field="*{role}" required>
+                    <select name="" class="form-control form-control-sm" th:field="*{role}">
+                        <option th:value="${role}" th:text="${role}" th:each="role : ${roles}"></option>
+                    </select>
+                    <!-- <input type="text" class="form-control form-control-sm" pattern="[A-Z\s]+" th:field="*{role}" required> -->
                 </div>
             </div>
             <div>

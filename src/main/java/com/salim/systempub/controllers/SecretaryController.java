@@ -8,40 +8,34 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.salim.systempub.models.Secretary;
-import com.salim.systempub.repository.secretary.SecretaryRepository;
+import com.salim.systempub.entities.Secretary;
+import com.salim.systempub.services.secretary.SecretaryService;
 
 @Controller
 @RequestMapping("/sekretaris")
 public class SecretaryController {
 
     @Autowired
-    private SecretaryRepository secretaryRepository;
+    SecretaryService secretaryService;
+
     @GetMapping("/")
     public String home(Model model) {
-        model.addAttribute("agenda", secretaryRepository.findAll());
-        model.addAttribute("add", new Secretary());
-        return "secretary/index";
+        return secretaryService.home(model);
     }
-    // @GetMapping("/agenda/")
-    // public String agenda(Model model){
-    //     model.addAttribute("agenda", secretaryRepository.findAll());
-    //     return "secretary/list-agenda";
-    // }
-    // @GetMapping("/add/")
-    // public String addAgenda(Model model){
-    //     Secretary agenda=new Secretary();
-    //     model.addAttribute("add", agenda);
-    //     return "secretary/add-agenda";
-    // }
+    @GetMapping("/agenda/")
+    public String agenda(Model model){
+        return secretaryService.agendaList(model);
+    }
+    @GetMapping("/add/")
+    public String addAgenda(Model model){
+        return secretaryService.add(model);
+    }
     @PostMapping("/save")
     public String saveAgenda(Secretary agenda){
-        secretaryRepository.save(agenda);
-        return "redirect:/sekretaris/";
+        return secretaryService.save(agenda);
     }
     @GetMapping("/delete/{id}")
     public String deleteString(@PathVariable(value = "id")Long id,Model model){
-        secretaryRepository.deleteById(id);
-        return "redirect:/sekretaris/";
+        return secretaryService.delete(id, model);
     }
 }

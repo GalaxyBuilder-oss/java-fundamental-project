@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.salim.systempub.models.divpendidikan.Kelompok;
-import com.salim.systempub.models.divpendidikan.MemberDivPendidikan;
-import com.salim.systempub.models.divpendidikan.MemberGroup;
-import com.salim.systempub.repository.MemberRepository;
-import com.salim.systempub.repository.divitionrepository.divpendidikan.KelompokRepository;
-import com.salim.systempub.repository.divitionrepository.divpendidikan.MemberDivPendidikanRepository;
-import com.salim.systempub.repository.divitionrepository.divpendidikan.MemberGroupRepository;
+import com.salim.systempub.entities.divpendidikan.Kelompok;
+import com.salim.systempub.entities.divpendidikan.MemberDivPendidikan;
+import com.salim.systempub.entities.divpendidikan.MemberGroup;
+import com.salim.systempub.repositories.MemberRepository;
+import com.salim.systempub.repositories.divitionrepository.divpendidikan.KelompokRepository;
+import com.salim.systempub.repositories.divitionrepository.divpendidikan.MemberDivPendidikanRepository;
+import com.salim.systempub.repositories.divitionrepository.divpendidikan.MemberGroupRepository;
 
 @Controller
 @RequestMapping("/divisi/pendidikan")

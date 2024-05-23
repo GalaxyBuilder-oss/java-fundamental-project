@@ -7,7 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.salim.systempub.models.Auth;
+import com.salim.systempub.entities.Auth;
 
 public class CostumUserDetails implements UserDetails {
 
@@ -15,7 +15,6 @@ public class CostumUserDetails implements UserDetails {
     
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        System.out.println(auth.getRole());
         return Collections.singleton(new SimpleGrantedAuthority(auth.getRole()));
     }
     

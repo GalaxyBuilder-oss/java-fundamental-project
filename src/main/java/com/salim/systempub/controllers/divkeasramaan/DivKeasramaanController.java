@@ -7,87 +7,70 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.salim.systempub.models.divkeasramaan.MemberDivKeasramaan;
-import com.salim.systempub.models.divkeasramaan.MemberDormitory;
-import com.salim.systempub.repository.MemberRepository;
-import com.salim.systempub.repository.divitionrepository.divkeasramaan.MemberDivKeasramaanRepository;
-import com.salim.systempub.repository.divitionrepository.divkeasramaan.MemberDormitoryRepository;
+import com.salim.systempub.dto.MemberRequestDto;
+import com.salim.systempub.dto.divkeasramaan.BoarderRequestDto;
+import com.salim.systempub.services.divitions.divkeasramaan.DivKeasramaanService;
 
 @Controller
 @RequestMapping("/divisi/keasramaan")
 public class DivKeasramaanController {
+
     @Autowired
-    private MemberDivKeasramaanRepository memberDivKeasramaanRepository;
-    @Autowired
-    private MemberRepository memberRepository;
-    @Autowired
-    private MemberDormitoryRepository memberDormitoryRepository;
+    private DivKeasramaanService divKeasramaanService;
 
     @GetMapping("/")
-    public String home(Model model){
-        model.addAttribute("addMember", new MemberDivKeasramaan());
-        model.addAttribute("memberDiv", memberDivKeasramaanRepository.findAll());
-        model.addAttribute("member", memberRepository.findAll());
-        model.addAttribute("dweller", memberDormitoryRepository.findAll());
-        model.addAttribute("addDweller", new MemberDormitory());
-        return "divkeasramaan/index";
+    public String home(Model model) {
+        return divKeasramaanService.home(model);
     }
-    // @GetMapping("/list/")
-    // public String list(Model model){
-    //     model.addAttribute("memberDiv", memberDivKeasramaanRepository.findAll());
-    //     return "divkeasramaan/list";
-    // }
-    // @GetMapping("/add/")
-    // public String addMember(Model model){
-    //     MemberDivKeasramaan member=;
-    //     model.addAttribute("add", new MemberDivKeasramaan());
-    //     model.addAttribute("member", memberRepository.findAll());
-    //     return "divkeasramaan/add";
-    // }
+
+    @GetMapping("/list/")
+    public String list(Model model) {
+        return divKeasramaanService.list(model);
+    }
+
+    @GetMapping("/add/")
+    public String add(Model model) {
+        return divKeasramaanService.add(model);
+    }
+
     @PostMapping("/save")
-    public String saveMember(MemberDivKeasramaan member){
-        memberDivKeasramaanRepository.save(member);
-        return "redirect:/divisi/keasramaan/";
+    public String save(MemberRequestDto dto) {
+        return divKeasramaanService.save(dto);
     }
+
     @GetMapping("/delete/{id}")
-    public String deleteString(@PathVariable(value = "id")Long id,Model model){
-        memberDivKeasramaanRepository.deleteById(id);
-        return "redirect:/divisi/keasramaan/";
+    public String delete(@PathVariable(value = "id") Long id, Model model) {
+        return divKeasramaanService.delete(id, model);
     }
+
     @GetMapping("/update/{id}")
-    public String updateString(@PathVariable(value = "id")Long id,Model model){
-        model.addAttribute("member", memberRepository.findAll());
-        model.addAttribute("update", memberDivKeasramaanRepository.getReferenceById(id));
-        return "divkeasramaan/update";
+    public String update(@PathVariable(value = "id") Long id, Model model) {
+        return divKeasramaanService.update(id, model);
     }
 
     // anggota asrama
-    // @GetMapping("/list-penghuni/")
-    // public String listPenghuni(Model model){
-       
-    //     return "divkeasramaan/list-penghuni";
-    // }
-    // @GetMapping("/add-penghuni/")
-    // public String addPenghuni(Model model){
-    //     MemberDormitory member=;
-    //     model.addAttribute("member", memberRepository.findAll());
-    //     return "divkeasramaan/add-penghuni";
-    // }
+    @GetMapping("/list-penghuni/")
+    public String listBoarder(Model model) {
+        return divKeasramaanService.listBoarder(model);
+    }
+
+    @GetMapping("/add-penghuni/")
+    public String addBoarder(Model model) {
+        return divKeasramaanService.addBoarder(model);
+    }
+
     @PostMapping("/save-penghuni")
-    public String savePenghuni(MemberDormitory member){
-        memberDormitoryRepository.save(member);
-        return "redirect:/divisi/keasramaan/";
+    public String saveBoarder(BoarderRequestDto dto) {
+        return divKeasramaanService.saveBoarder(dto);
     }
+
     @GetMapping("/delete-penghuni/{id}")
-    public String deletePenghuni(@PathVariable(value = "id")Long id,Model model){
-        memberDormitoryRepository.deleteById(id);
-        return "redirect:/divisi/keasramaan/";
+    public String deleteBoarder(@PathVariable(value = "id") Long id, Model model) {
+        return divKeasramaanService.deleteBoarder(id, model);
     }
+
     @GetMapping("/update-penghuni/{id}")
-    public String updatePenghuni(@PathVariable(value = "id")Long id,Model model){
-        model.addAttribute("member", memberRepository.findAll());
-        model.addAttribute("update", memberDormitoryRepository.getReferenceById(id));
-        return "divkeasramaan/update-penghuni";
+    public String updateBoarder(@PathVariable(value = "id") Long id, Model model) {
+        return divKeasramaanService.updateBoarder(id, model);
     }
 }

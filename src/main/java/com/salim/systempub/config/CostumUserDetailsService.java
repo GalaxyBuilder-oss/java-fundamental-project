@@ -6,8 +6,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.salim.systempub.models.Auth;
-import com.salim.systempub.repository.AuthRepository;
+import com.salim.systempub.entities.Auth;
+import com.salim.systempub.repositories.AuthRepository;
 
 @Service
 public class CostumUserDetailsService implements UserDetailsService {
@@ -17,7 +17,8 @@ public class CostumUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Auth auth = authRepository.findByUsername(username);
+        
+        Auth auth = authRepository.findByUsername(username).orElse(null);
         if(auth == null) {
             throw new UnsupportedOperationException("User Not Found");
         }
