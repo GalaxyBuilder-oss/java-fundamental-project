@@ -2,20 +2,61 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head th:insert="~{fragments/common :: head}">
-    <title th:text="#{app.name}"></title>
 </head>
 
 <body>
-    <!-- <div th:replace="~{ fragments/common :: (${user.isAdmin}? #{header.admin} : #{header.normaluser}) }"></div> -->
-    <header th:insert="~{fragments/header_page :: (${isLogin}) ? headerlogin : headernologin}"></header>
+    <header th:insert="~{fragments/header_page :: user}"></header>
     <main class="container-fluid">
-        <div class="banner mx-auto">
-            anggap ini banner
-        </div>
-        <a th:href="@{/auth/add}">Login Sebagai User</a>
+        <p class="alert alert-success" th:text="${'Selamat Datang, '+member.name+'!'}"></p>
+        <table class="table">
+            <tr>
+                <td>Asrama</td>
+                <td th:text="${dataasrama}"></td>
+            </tr>
+            <tr>
+                <td>Sisa Poin Sholat</td>
+                <td th:text="${poin}"></td>
+                <td>hafalan</td>
+                <td th:text="${hafalan}"></td>
+            </tr>
+            <tr>
+                <td>TPA Daerah</td>
+                <td th:text="${datappmb}"></td>
+            </tr>
+            <tr>
+                <td>Piket Kampus</td>
+                <td th:text="${piketday}"></td>
+                <td th:text="${piketroom}"></td>
+            </tr>
+            <tr>
+                <td>Vocabullary</td>
+                <td th:text="${vocab+' Kata'}"></td>
+            </tr>
+            <tr>
+            <tr>
+                <th>Cek Keikutsertaan Divisi</th>
+            </tr>
+            <td>Pendidikan Dan Pelatihan</td>
+            <td>Pelatihan Bahasa Inggris</td>
+            <td>Kesejahteraan</td>
+            <td>Kerohanian</td>
+            <td>Kesehatan</td>
+            <td>Kebersihan</td>
+            <td>Keasramaan</td>
+            </tr>
+            <tr>
+                <td th:text="${datadivpendidikan}">-</td>
+                <td th:text="${datadivpelatihaninggris}">-</td>
+                <td th:text="${datadivkesejahteraan}">-</td>
+                <td th:text="${datadivkerohanian}">-</td>
+                <td th:text="${datadivkesehatan}">-</td>
+                <td th:text="${datadivkebersihan}">-</td>
+                <td th:text="${datadivkeasramaan}">-</td>
+            </tr>
+        </table>
     </main>
     <div th:replace="~{fragments/common :: script}"></div>
-    <footer th:replace="~{fragments/footer_page :: (${isLogin}) ? footerlogin : footernologin}"></footer>
+    <footer th:replace="~{fragments/footer_page :: user}"></footer>
 </body>
 
 </html>

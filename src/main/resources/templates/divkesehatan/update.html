@@ -8,18 +8,15 @@
     <header th:insert="~{fragments/header_page :: divisi"></header>
     <main class="container-fluid">
         <form th:action="@{/divisi/kebersihan/save}" method="post" th:object="${update}">
-            <div class="input-group mb-3">
-                <label for="" class="input-group-text">Jabatan</label>
                 <input type="hidden" th:field="*{id}">
-            </div>
             <div class="input-group mb-3">
-                <label for="" class="input-group-text">Jabatan</label>
+                <label for="" class="input-group-text">NAMA</label>
                 <select th:field="*{idMember}" id="">
                     <option th:each="m : ${member}" th:value="${m.id}" th:text="${m.name}"></option>
                 </select>
             </div>
             <div class="input-group mb-3">
-                <label for="" class="input-group-text">Jabatan</label>
+                <label for="" class="input-group-text">JABATAN</label>
                 <input type="text" th:field="*{role}" id="">
             </div>
             <div class="input-group mb-3">

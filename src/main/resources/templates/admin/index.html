@@ -37,17 +37,15 @@
           </div>
         </div>
         <hr>
-        <div class="card text-center">
-          <div class="card-header">Featured</div>
+        <div class="card text-center" th:if="${ifMessage}">
+          <div class="card-header" th:text="${name}">Featured</div>
           <div class="card-body">
-            <h5 class="card-title">Special title treatment</h5>
-            <p class="card-text">
+            <h5 class="card-title" th:text="${number}">Special title treatment</h5>
+            <p class="card-text" th:text="${message}">
               With supporting text below as a natural lead-in to additional
               content.
             </p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
           </div>
-          <div class="card-footer text-body-secondary">2 days ago</div>
         </div>
       </aside>
 
@@ -61,9 +59,6 @@
           </li>
           <li class="nav-item">
             <button class="nav-link" id="list-tab" data-bs-toggle="tab" data-bs-target="#list" aria-selected="false">Daftar Akun</button>
-          </li>
-          <li cla<!-- ss="nav-item">
-            <button class="nav-link disabled" aria-disabled="true">Disabled</button>
           </li>
         </ul>
         <div class="tab-content" id="tabContent">
@@ -120,7 +115,6 @@
                   <tr th:each="akun,n : ${accounts}" th:object="${akun}">
                     <td th:text="${n.count}"></td>
                     <td th:text="*{username}"></td>
-                    <!-- <td th:text="*{password}"></td> -->
                     <td th:text="*{role}"></td>
                     <td>
                       <a th:href="@{/admin/update/{id}(id=*{id})}">Update</a>
