@@ -20,6 +20,7 @@ public class Member {
     private String address;
     private String description;
     private int ryear;
+    
     @ManyToOne
     @JoinColumn(name = "id_generation",referencedColumnName = "id")
     private Generation idgen;

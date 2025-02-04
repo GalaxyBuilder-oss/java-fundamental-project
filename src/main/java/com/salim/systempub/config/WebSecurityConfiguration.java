@@ -48,23 +48,23 @@ public class WebSecurityConfiguration {
                 .requestMatchers("/login", "/", "/auth/", "/about/", "/calladmin/**").permitAll()
                 .requestMatchers("/admin/**").hasAuthority(RolesConstant.ADMIN)
                 .requestMatchers("/user/**").hasAuthority(RolesConstant.USER)
-                .requestMatchers("/bendahara/**").hasAnyAuthority("BENDAHARA", RolesConstant.ADMIN)
-                .requestMatchers("/sekretaris/**").hasAnyAuthority("SEKRETARIS", RolesConstant.ADMIN)
-                .requestMatchers("/ppmb/**").hasAnyAuthority("PPMB", RolesConstant.ADMIN)
+                .requestMatchers("/bendahara/**").hasAnyAuthority(RolesConstant.BENDAHARA, RolesConstant.ADMIN)
+                .requestMatchers("/sekretaris/**").hasAnyAuthority(RolesConstant.SEKRETARIS, RolesConstant.ADMIN)
+                .requestMatchers("/ppmb/**").hasAnyAuthority(RolesConstant.PPMB, RolesConstant.ADMIN)
                 .requestMatchers("/divisi/")
-                .hasAnyAuthority("DIVISI PENDIDIKAN DAN PELATIHAN", "DIVISI PELATIHAN BAHASA INGGRIS",
-                        "DIVISI KEROHANIAN", "DIVISI KESEJAHTERAAN", "DIVISI KESEHATAN", "DIVISI KEASRAMAAN",
-                        "DIVISI KEBERSIHAN", RolesConstant.ADMIN)
+                .hasAnyAuthority(RolesConstant.DIVISI_PENDIDIKAN_PELATIHAN, RolesConstant.DIVISI_PELATIHAN_INGGRIS,
+                        RolesConstant.DIVISI_KEROHANIAN, RolesConstant.DIVISI_KESEJAHTERAAN, RolesConstant.DIVISI_KEBERSIHAN, RolesConstant.DIVISI_KEASRAMAAN,
+                        RolesConstant.DIVISI_KESEHATAN, RolesConstant.ADMIN)
                 .requestMatchers("/divisi/pendidikan/**")
                 .hasAnyAuthority("DIVISI PENDIDIKAN DAN PELATIHAN", RolesConstant.ADMIN)
                 .requestMatchers("/divisi/pelatihaninggris/**")
                 .hasAnyAuthority("DIVISI PELATIHAN BAHASA INGGRIS", RolesConstant.ADMIN)
-                .requestMatchers("/divisi/kerohanian/**").hasAnyAuthority("DIVISI KEROHANIAN", RolesConstant.ADMIN)
+                .requestMatchers("/divisi/kerohanian/**").hasAnyAuthority(RolesConstant.DIVISI_KEROHANIAN, RolesConstant.ADMIN)
                 .requestMatchers("/divisi/kesejahteraan/**")
-                .hasAnyAuthority("DIVISI KESEJAHTERAAN", RolesConstant.ADMIN)
-                .requestMatchers("/divisi/kesehatan/**").hasAnyAuthority("DIVISI KESEHATAN", RolesConstant.ADMIN)
-                .requestMatchers("/divisi/keasramaan/**").hasAnyAuthority("DIVISI KEASRAMAAN", RolesConstant.ADMIN)
-                .requestMatchers("/divisi/kebersihan/**").hasAnyAuthority("DIVISI KEBERSIHAN", RolesConstant.ADMIN)
+                .hasAnyAuthority(RolesConstant.DIVISI_KESEJAHTERAAN, RolesConstant.ADMIN)
+                .requestMatchers("/divisi/kesehatan/**").hasAnyAuthority(RolesConstant.DIVISI_KESEHATAN, RolesConstant.ADMIN)
+                .requestMatchers("/divisi/keasramaan/**").hasAnyAuthority(RolesConstant.DIVISI_KEASRAMAAN, RolesConstant.ADMIN)
+                .requestMatchers("/divisi/kebersihan/**").hasAnyAuthority(RolesConstant.DIVISI_KEBERSIHAN, RolesConstant.ADMIN)
                 .anyRequest().authenticated())
                 .formLogin((form) -> form
                         .loginPage("/login").permitAll()
@@ -123,7 +123,6 @@ public class WebSecurityConfiguration {
                         .logoutSuccessHandler(new LogoutSuccessHandler() {
                             public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response,
                                     Authentication authentication) throws IOException, ServletException {
-                                System.out.println("User logged out: " + authentication.getName());
                                 response.sendRedirect("/");
                             }
                         }))
